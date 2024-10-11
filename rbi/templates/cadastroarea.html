@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block rbi %}
+
+<form method="post" enctype="=multipart/form-data" height="100px" width="auto">
+    {% csrf_token %}
+    <table>
+        {{cadastroarea_form.as_table}}
+    </table>
+    
+    <input type="submit" value="Cadastrar" class="btn btn-primary">
+</form>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block rbi %}
+<form method="post" enctype="=multipart/form-data">
+    {% csrf_token %}
+    <table>
+        {{cadastrocomponente_form.as_table}}
+    </table>
+    
+    <input type="submit" value="Cadastrar" class="btn btn-primary">
+</form>
+{% endblock %}

@@ -1,0 +1,21 @@
+
+{% extends "base.html" %}
+
+    {% block content %}
+        <body>
+            <form method="GET" action="{% url 'rbi_list' %}">
+                <input type="text" name="search" placeholder="Buscar empresa">
+                <button type=submit>buscar</button>
+            </form>
+            
+            
+            {% for empresa in rbi %}
+                
+
+                <h3>  {{empresa.nomefantasia}} - {{ empresa.razaosocial }} </h3>
+                
+                
+            {% endfor %}
+        
+        </body>
+    {% endblock %}

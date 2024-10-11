@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="" width=device-width, initial-scale="1.0">
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
+    </head>
+    <body>
+        <header>
+            <nav>
+                <ul>   
+                    <div class="card">
+                        <div class="card-header" style="background-color: steelblue";>
+                            API RBI - Versão Beta - By Subtil
+                
+                            {% if user.is_authenticated %}
+                                <li> Usuário: {{user}} </li>
+                            {% endif %}
+
+                            {% if not user.is_authenticated %}
+                                <li><a href="{% url 'register' %}" > Cadastre-se </a></li>
+                                <li><a href="{% url 'login' %}">Login</a></li>
+                            {% endif %}
+                               
+                        </div>
+                    </div>                                         
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            {% block rbi %}
+            {% endblock %}
+        </main>
+
+        <fotter>
+            <p>&copy;2024 rbi </p>
+        </fotter>
+
+    </body>
+     
+
+
+</html>

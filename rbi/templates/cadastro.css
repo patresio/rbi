@@ -1,0 +1,7 @@
+html { background-color: #000; } 
+body {
+    min-height: 50vh;
+    max-width: 100px;
+    background-color: papayawhip; 
+    margin: 0 auto;
+}

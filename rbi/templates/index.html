@@ -1,0 +1,1723 @@
+{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="pt-br">
+{% load static %}
+{% block rbi %}
+  <head>
+    <!-- Meta tags Obrigatórias -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="{% static 'index.js' %}" defer></script>
+        
+
+    <!-- jstree css -->
+    <link href="index.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">    
+        <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle"  href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Cadastro
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="{% url 'cadastroempresa' %}">Nova Empresa</a>                         
+                  <a class="dropdown-item" href="{% url 'cadastroarea' %}">Nova Área</a>
+                  <a class="dropdown-item" href="{% url 'cadastroequip' %}">Novo Equipamento</a>
+                  <a class="dropdown-item" href="{% url 'cadastrocomponente' %}">Novo Componente</a>
+                  <a class="dropdown-item" href="{% url 'cadastroproposta' %}">Nova Proposta</a>
+                  <a class="dropdown-item" href="#">Salvar</a>
+                  <a class="dropdown-item" href="#">Imprimir</a>
+                    <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="window. close()">Fechar</a>
+                </div>
+            </li>         
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Visualizar
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="#">Risco</a>
+                  <a class="dropdown-item" href="#">Gráfico</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Memória de cálculo</a>
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Ferramentas
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Calculadora</a>
+                    <a class="dropdown-item" href="#">Importar</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="configuracao.html">Configurações</a>
+                </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Ajuda
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="./licenca.html">Sobre a licença</a> 
+                  <a class="dropdown-item" href="./manual.html">Manual</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Registro</a>
+                </div>
+              </li>
+          </ul>
+        </div>
+    </nav>
+    </div>
+    <div class="card">
+        <div class="card-header">
+                <a href="#"><img src="{% static '/imagens/salvar-arquivo.jpg' %}" width="33px"/> </button>
+                <a href="#"><img src="{% static '/imagens/abrir_pasta.jpg' %}" width="40px">
+                <a href="#"><img src="{% static '/imagens/Calculadora.jpg' %}" width="27px"></a>
+         </div>
+    </div>
+    <div class="container-md  style=" >
+        <div class="row g-0 p-0"  >
+            <div class="col-2 p-0">
+                <div class="card">
+                    <div class="card-header">
+                        Navegação   
+                        <ul class="list-group list-group-flush">    
+                            
+                           {{ xxxx }}
+
+                            {% for empresa in rbi %}
+                                <li class="list-group-item">
+                                    <a href="#collapse{{empresa.slug}}" class="list-group list-group-flush" data-bs-toggle="collapse" href="#collapse{{empresa.slug}}" aria-expanded="false" aria-controls="collapse{{empresa.slug}}" role="button">{{ empresa.nome }}</a>
+                            
+                                    <div class="collapse" id="collapse{{empresa.slug}}">
+                                        <ul class="list-group list-group-flush">
+
+                                            {{ rbi }}
+
+                                            {% for area in empresa.areas.all %}
+                                                <li class="list-group-item">
+                                                    <a href="#collapse{{area.slug}}" class="list-group list-group-flush" data-bs-toggle="collapse" href="#collapse{{area.slug}}" aria-expanded="false" aria-controls="collapse{{area.slug}}" role="button">{{ area.nome }}</a>
+            
+                                                    <div class="collapse" id="collapse{{area.slug}}">
+                                                        <ul class="list-group list-group-flush">
+                                                            
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>                   
+                    </div> 
+                </div>
+            </div>
+            <div class="col-10 p-0">
+                    <nav>
+                        <div class="nav nav-tabs pt-1" id="nav-tab" role="tablist" style="height: 30px">
+                            <a class="nav-item nav-link active  shadow p-3 mb-5 bg-info text-white rounded" style="height: 40px"; id="nav-a0-tab" data-toggle="tab" href="#nav-a0" role="tab" aria-controls="nav-a0" aria-selected="true">Equipamento</a>
+                            <a class="nav-item nav-link shadow p-3 mb-5 bg-info text-white rounded" style="height: 40px"; id="nav-a-tab" data-toggle="tab" href="#nav-a" role="tab" aria-controls="nav-a" aria-selected="false">Dados gerais</a>
+                            <a class="nav-item nav-link shadow p-3 mb-5 bg-info text-white rounded" style="height: 40px"; id="nav-b-tab" data-toggle="tab" href="#nav-b" role="tab" aria-controls="nav-b" aria-selected="false">Condições operacionais</a>
+                            <a class="nav-item nav-link shadow p-3 mb-5 bg-info text-white rounded" style="height: 40px"; id="nav-c-tab" data-toggle="tab" href="#nav-c" role="tab" aria-controls="nav-c" aria-selected="false">Componente</a>
+                            <a class="nav-item nav-link shadow p-3 mb-5 bg-info text-white rounded" style="height: 40px"; id="nav-d-tab" data-toggle="tab" href="#nav-d" role="tab" aria-controls="nav-d" aria-selected="false">Volume e Massa</a>
+                            <a class="nav-item nav-link shadow p-3 mb-5 bg-success text-white rounded" style="height: 40px"; id="nav-e-tab" data-toggle="tab" href="#nav-e" role="tab" aria-controls="nav-e" aria-selected="false">Mecanismos de dano</a>
+                            <a class="nav-item nav-link shadow p-3 mb-5 bg-info text-white rounded" style="height: 40px"; id="nav-f-tab" data-toggle="tab" href="#nav-f" role="tab" aria-controls="nav-f" aria-selected="false">Históricos de inspeção</a>
+                            <a class="nav-item nav-link shadow p-3 mb-5 bg-info text-white rounded" style="height: 40px"; id="nav-g-tab" data-toggle="tab" href="#nav-g" role="tab" aria-controls="nav-g" aria-selected="false">Resultados (Risco)</a>
+                        </div>
+                    </nav>
+
+                    <div class="tab-content p-1 shadow p-3 mb-3 bg-white rounded" style="width: 1300px "; style="height: 600px"; id="nav-tabContent"> 
+                        <div class="tab-pane fade show active pt-0" id="nav-a0" role="tabpanel" aria-labelledby="nav-a0tab">  
+                            <div class="container-md">
+                                <div class="row g-0 p-0">  
+                                    <div class="col-6 p-3">                                                                                                            
+                                        <div class="form-group row pt-0" style="height: 25px";>
+                                            <label for="tagequip" class="col-sm-5 col-form-label pt-0"  >Tag do equipamento</label>
+                                            <div class="col-sm-5 p-0" >
+                                                <input type="text" class="form-control col-form-label"  id="tagequip" placeholder="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row pt-0" style="height: 25px";>
+                                            <label for="tipoequip" class="col-sm-5 col-form-label pt-0">Tipo de equipamento</label>
+                                            <div class="col-sm-5 col-form-label p-0" >
+                                                <select id="tipoequip" class="form-control form-control-2g" >
+                                                    <option>Compressor</option>
+                                                    <option>Trocador de calor</option>
+                                                    <option>Tubulação</option>
+                                                    <option>Bomba</option>
+                                                    <option>Tanque API 650 (fundo)</option>
+                                                    <option>Tanque API 650 (costado)</option>
+                                                    <option>Vaso de pressão</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row pt-0" style="height: 25px";>
+                                            <label for="nomeequip" class="col-sm-5 col-form-label pt-0">Nome do equipamento</label>
+                                            <div class="col-sm-5 col-form-label p-0" >
+                                                <input type="text" class="form-control col-form-label" id="nomeequip" placeholder="">
+                                            </div>
+                                        </div>
+                                    
+                                        <div class="form-group row pt-0" style="height: 25px";>  
+                                            <label for="descproc" class="col-sm-5 col-form-label pt-0">Descrição do processo</label>
+                                            <div class="col-sm-5 col-form-label p-0" >
+                                                <input type="text" class="form-control col-form-label" id="descproc" maxlength="100" placeholder="">
+                                            </div>
+                                        </div>
+                                    </div>  
+                                                                             
+                                </div>          
+                            </div>
+                        </div>                  
+                        <div class="tab-pane fade" id="nav-a" role="tabpanel" aria-labelledby="nav-a-tab">  
+                            <div class="container-md">
+                                <div class="row g-0 p-0">  
+                                    <div class="col-6 p-3">                                                                      
+                                        <div class="form-group row pt-0" style="height: 25px";>
+                                            <label for="dataavaliacao" class="col-sm-5 col-form-label pt-0" >Data da avaliação</label>
+                                            <div class="col-sm-5 p-0">
+                                                <input type="date" class="form-control col-form-label pt-0" id="inputEmail3" placeholder="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row" style="height: 25px";>
+                                            <label for="metodoavalia" class="col-sm-5 col-form-label pt-0"  >Método da avaliação</label>
+                                            <div class="col-sm-5 col-form-label p-0" >
+                                                <select class="form-control form-control-2g" >
+                                                    <option>Qualitativo</option>
+                                                    <option>Semi quantitativo</option>
+                                                    <option>Quantitativo</option>
+                                                </select>
+                                            </div> 
+                                        </div>
+                                        <div class="form-group row pt-0" style="height: 25px";>
+                                            <label for="periodoavalia" class="col-sm-5 col-form-label pt-0" >Período do risco avaliado (meses)</label>
+                                            <div class="col-sm-5 p-0" >
+                                                <input type="text" class="form-control col-form-labelm"  id="periodoavalia" placeholder="">
+                                            </div>
+                                        </div>
+                                                                    
+                                        <div class="form-group row" style="height: 25px";>
+                                            <label for="tipogeom" class="col-sm-5 col-form-label pt-0"  >Tipo de geometria (API)</label>
+                                            <div class="col-sm-5 col-form-label p-0" >
+                                                <select class="form-control form-control-2g" >
+                                                    <option>CYL</option>
+                                                    <option>ELB</option>
+                                                    <option>SPH</option>
+                                                    <option>HEM</option>
+                                                    <option>ELL</option>
+                                                    <option>TOR</option>
+                                                    <option>CON</option>
+                                                    <option>NOZ</option>
+                                                    <option>PLT</option>
+                                                </select>
+                                            </div> 
+                                        </div>
+                                        <div class="form-group row" style="height: 25px";>
+                                            <label for="codproj" class="col-sm-5 col-form-label pt-0" >Código de projeto</label>
+                                            <div class="col-sm-5 p-0" >
+                                                <input type="text" class="form-control col-form-label" id="codproj" placeholder="">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group row" style="height: 25px";>
+                                            <label for="datainiope" class="col-sm-5 col-form-label pt-0">Data de início de operação</label>
+                                            <div class="col-sm-5 p-0">
+                                                <input type="date" class="form-control col-form-label pt-0" id="datainiope" >
+                                            </div>
+                                        </div>
+                                        <div class="form-group row " style="height: 25px";>
+                                            <label for="nomecomp" class="col-sm-5 col-form-label">Nome do componente</label>
+                                            <div class="col-sm-5 p-0">
+                                                <input type="text" class="form-control col-form-label" id="nomecomp" placeholder="">
+                                            </div>
+                                        </div>                           
+                                        <div class="form-group row " style="height: 25px";>
+                                            <label for="materialcomp" class="col-sm-5 col-form-label">Material do componente</label>
+                                            <div class="col-sm-5 p-0">
+                                                <input type="text" class="form-control col-form-label" id="materialcomp" placeholder="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row" style="height: 25px";>
+                                            <label for="tensaores" class="col-sm-5 col-form-label">Tensão de resistência (MPa)</label>
+                                            <div class="col-sm-5 p-0">
+                                                <input type="text" class="form-control col-form-label" id="tensaores" placeholder="">
+                                            </div>
+                                        </div>                                           
+                                        <div class="form-group row" style="height: 25px";>
+                                            <label for="tensaoesco" class="col-sm-5 col-form-label">Tensão de escoamento (MPa)</label>
+                                            <div class="col-sm-5 p-0">
+                                                <input type="text" class="form-control col-form-label" id="tensaoesco" placeholder="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row" style="height: 25px";>
+                                            <label for="tensaoadm" class="col-sm-5 col-form-label">Tensão admissível (MPa)</label>
+                                            <div class="col-sm-5 p-0">
+                                                <input type="text" class="form-control col-form-label" id="tensaoad" placeholder="">
+                                            </div>
+                                        </div>
+                                                                        
+                                    </div>      
+                                    <div class="col-6 p-3">  
+                                        
+                                        <div class="form-group row" style="height: 25px";>
+                                            <label for="percsaco" class="col-sm-6 col-form-label">% de enxofre no aço</label>
+                                            <div class="col-sm-5 p-0">
+                                                <input type="text" class="form-control col-form-label" id="percsaco" placeholder="">
+                                            </div>
+                                        </div>
+                                        <div class="form-check col-12 p-2" style="height: 35px";>
+                                            <input class="form-check-input col-1 " type="checkbox" value="" id="pwht">
+                                            <label class="form-check-label col-11" for="pwht">
+                                                Tratamento térmico após soldagem  
+                                            </label>
+                                        </div>
+                                        <div class="form-check col-12 p-2" style="height: 40px";>
+                                            <input class="form-check-input col-1" type="checkbox" value="" id="contrtranst">
+                                            <label class="form-check-label col-11" for="contrtranst">
+                                                Controle adm. de tratamento de transtornos
+                                            </label>
+                                        </div>
+                                        <div class="form-group row" style="height: 25px" >
+                                            <label for="confiabdados" class="col-sm-6 col-form-label pt-0" >Confiabilidade dos dados</label>
+                                            <div class="col-sm-5 col-form-label- p-0" >
+                                                <select class="form-control form-control-2g" id="confiabdados" >
+                                                    <option>Baixa</option>
+                                                    <option>Média</option>
+                                                    <option>Alta</option>
+                                                </select>
+                                            </div> 
+                                        </div>
+                                        <div class="form-group row" style="height: 50px";>
+                                            <label for="fms" class="col-sm-6 col-form-label">FMS-Fator de gerenciamento (maior que zero e menor ou igual a 1)</label>
+                                            <div class="col-sm-5 p-0">
+                                                <input type="text" class="form-control col-form-label" id="fms" placeholder="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row" style="height: 40px";>
+                                            <label for="tipoconst" class="col-sm-6 col-form-label pt-0"  >Tipo de construção se tanque de armazenamento</label>
+                                            <div class="col-sm-5 col-form-label- p-0" >
+                                                <select class="form-control form-control-2g" id="tipoconst">
+                                                    <option>Soldado</option>
+                                                    <option>rebitado</option>
+                                                </select>
+                                            </div> 
+                                        </div>
+                                        <div class="form-group row" style="height: 40px";>
+                                            <label for="manutapi653" class="col-sm-6 col-form-label pt-0"  >No caso de Tanque (Manutenção conforme API 653?)</label>
+                                            <div class="col-sm-5 col-form-label- p-0" >
+                                                <select class="form-control form-control-2g" id="manutapi653">
+                                                    <option>Sim</option>
+                                                    <option>Não</option>
+                                                </select>
+                                            </div> 
+                                        </div>
+                                        <div class="form-group row" style="height: 25px";>
+                                            <label for="recalqapi653" class="col-sm-6 col-form-label pt-0"  >No caso de Tanque (Foi feita avaliação de recalque?)</label>
+                                            <div class="col-sm-5 col-form-label- p-0" >
+                                                <select class="form-control form-control-2g" id="recalqapi653">
+                                                    <option>Sim, valores excedentes API 653</option>
+                                                    <option>Sim, valores conforme API 653</option>
+                                                    <option>Nunca foi feito</option>
+                                                    <option>Fundação concreto</option>
+                                                    <option>Não aplicável</option>
+                                                </select>
+                                            </div> 
+                                        </div>
+                                     </div>
+                                    </div>
+                                 </div>
+                        </div>
+                        <div class="tab-pane fade" id="nav-b" role="tabpanel" aria-labelledby="nav-b-tab">
+                                                             
+                            <div class="form-group row" style="height: 25px";>
+                                <label for="presproj" class="col-sm-3 col-form-label">Pressão de projeto (kgf/cm&sup2)</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" id="presproj" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group row" style="height: 25px";>
+                                <label for="tempproj" class="col-sm-3 col-form-label">Temperatura de projeto (&#176C)</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" id="tempproj" placeholder="">                             
+                                </div>
+                            </div>
+                            <div class="form-group row" style="height: 25px";>
+                                <label for="temope" class="col-sm-3 col-form-label">Temperatura de operação (&#176C)</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" id="temope" placeholder="">
+                                </div>      
+                            </div>
+                            <div class="form-group row" style="height: 25px";>
+                                <label for="tempmax" class="col-sm-3 col-form-label">Temperatura máxima (&#176C)</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" id="tempmax" placeholder="">
+                                </div>      
+                            </div>
+                            <div class="form-group row" style="height: 25px";>
+                                <div class="form-check">
+                                    <input class="form-check-input ml-1" type="checkbox" value="" id="existtraco">
+                                    <label class="form-check-label ml-4" for="existtraco">
+                                        Existe traço de aquecimento?
+                                    </label>
+                                </div>
+                            </div> 
+                            <div class="form-group row" style="height: 25px";>
+                                <div class="form-check">
+                                    <input class="form-check-input ml-1" type="checkbox" value="" id="contvapor">
+                                    <label class="form-check-label ml-4" for="contvapor">
+                                        Vazamento de Vapor (no traço) ou contato com vapor
+                                    </label>
+                                </div>
+                            </div> 
+                            <div class="form-group row"style="height: 25px";>
+                                <label for="monitora" class="col-sm-3 col-form-label">Tem monitoramento on-line</label>
+                                <div class="col-sm-5">
+                                    <select class="form-control form-control-2g" id="monitora">
+                                        <option>Nenhum1</option>
+                                        <option>Amina</option>
+                                        <option>H2S</option>
+                                        <option>Hf</option>
+
+                                    </select>
+                                </div> 
+                            </div>
+                            <div class="form-group row"style="height: 25px";>
+                                <label for="pontoinje" class="col-sm-3 col-form-label">Tem ponto de injeção</label>
+                                <div class="col-sm-5">
+                                    <select class="form-control form-control-2g" id="pontoinje">
+                                        <option>Não ou inspeção efetiva</option>
+                                        <option>Sim</option>
+                                    </select>
+                                </div> 
+                            </div>
+                            <div class="form-group row"style="height: 25px";>
+                                <label for="deadleg" class="col-sm-3 col-form-label">Tem Dead Leg</label>
+                                <div class="col-sm-5">
+                                    <select class="form-control form-control-2g" id="deadleg">
+                                        <option>Não</option>
+                                        <option>Sim</option>
+                                    </select>
+                                </div> 
+                            </div>
+                            
+                            <div class="form-group row" style="height: 25px";>
+                                <label for="tipoinspdead" class="col-sm-3 col-form-label">Se tem dead leg, qual o tipo de inspeção?</label>
+                                <div class="col-sm-5">
+                                    <select class="form-control form-control-2g" id="tipoinspdead">
+                                        <option>A</option>
+                                        <option>B</option>
+                                        <option>C</option>
+                                        <option>D</option>
+                                        <option>E</option>
+                                    </select>
+                                </div> 
+                            </div>
+                        </div>          
+                        <div class="tab-pane fade" id="nav-c" role="tabpanel" aria-labelledby="nav-c-tab">
+                                                                   
+                            
+                            <div class="form-group row" style="height: 25px";>
+                                <label for="tipocompapi" class="col-sm-3 col-form-label">Tipo de componente API</label>
+                                <div class="col-sm-3 ">
+                                    <select class="form-control form-control-2g" id="tipocompapi">
+                                            <option>COMPC</option>
+                                            <option>COMPR</option>
+                                            <option>HEXSS</option>
+                                            <option>HEXTS</option>
+                                            <option>PIPE-1</option>
+                                            <option>PIPE-2</option>
+                                            <option>PIPE-4</option>
+                                            <option>PIPE-6</option>
+                                            <option>PIPE-8</option>
+                                            <option>PIPE-10</option>
+                                            <option>PIPE-12</option>
+                                            <option>PIPEGT16</option>
+                                            <option>PUMP2S</option>
+                                            <option>PUMPR</option>
+                                            <option>PUMP1S</option>
+                                            <option>TANKBOTTOM</option>
+                                            <option>COURSE-1-10</option>
+                                            <option>KODRUM</option>
+                                            <option>FILTER</option>
+                                            <option>DRUM</option>
+                                            <option>REACTOR</option>
+                                            <option>COLTOP</option>
+                                            <option>COLMID</option>
+                                    </select>
+                                </div> 
+                            </div>
+                            
+                            <div class="form-group row" style="height: 25px";>
+                                <label for="eficjun" class="col-sm-3 col-form-label">Eficiência de junta</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" id="eficjun" placeholder="">
+                                </div>
+                            </div>
+
+                            <div class="form-group row" style="height: 25px";>
+                                <label for="diametrocomp" class="col-sm-3 col-form-label">Diâmetro do componente (mm)</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" id="diametrocomp" placeholder="">
+                                </div>
+                            </div>
+
+                            
+                            <div class="form-group row" style="height: 25px";>
+                                <label for="raiocurva" class="col-sm-3 col-form-label">Raio da curva (mm)</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" id="raiocurva" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group row" style="height: 25px";>
+                                <label for="razaoelip" class="col-sm-3 col-form-label">Razão entre maior e menor eixos (ex. 2x1)</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" id="razaoelip" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group row" style="height: 25px";>
+                                <label for="raiocentral" class="col-sm-3 col-form-label">Raio central do Torisférico (mm)</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" id="raiocentral" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group row" style="height: 25px";>
+                                <label for="raiomenor" class="col-sm-3 col-form-label">Raio menor do Torisférico (mm)</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" id="raiomeno" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group row" style="height: 25px";>
+                                <label for="angulocone" class="col-sm-3 col-form-label">Ângulo do cone (&deg)</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" id="angulocone" placeholder="">
+                                </div>
+                            </div>
+
+                            <div class="form-group row" style="height: 25px";>
+                                <div class="form-check">
+                                    <input class="form-check-input ml-1" type="checkbox" value="" id="compcostura">
+                                    <label class="form-check-label ml-4" for="flexCheckDefault" id="compcostura">
+                                        Componente com costura (solda)
+                                    </label>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="tab-pane fade" id="nav-d" role="tabpanel" aria-labelledby="nav-d-tab">
+                                                                          
+                            <div class="form-group row" style="height: 25px";>
+                                <label for="volumeequip" class="col-sm-3 col-form-label">Volume do equipamento (m&sup3)</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control col-form-label-sm" id="volumeequip" placeholder="">
+                                </div>
+                            </div>
+                                  
+                            <div class="form-group row" style="height: 25px";>
+                                <label for="volumecomp" class="col-sm-3 col-form-label">Volume do componente (m&sup3)</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" id="volumecomp" placeholder="">
+                                </div>
+                            </div>
+                        </div>               
+                        <div class="tab-pane fade p-0" id="nav-e" role="tabpanel" aria-labelledby="nav-e-tab">
+                            <nav>
+                                <div class="nav nav-tabs pt-1" id="nav-tab" role="tablist" style="height: 30px">
+                                    <a class="nav-item nav-link active shadow p-3 mb-5 bg-success text-white rounded" style="height: 40px"; id="nav-e1-tab" data-toggle="tab" href="#nav-e1" role="tab" aria-controls="nav-e1" aria-selected="true">(S4) Perdas de espessura</a>
+                                    <a class="nav-item nav-link shadow p-3 mb-5 bg-success text-white rounded" style="height: 40px" id="nav-e2-tab" data-toggle="tab" href="#nav-e2" role="tab" aria-controls="nav-e2" aria-selected="false">(S5) Comp./ com Linning</a>
+                                    <a class="nav-item nav-link shadow p-3 mb-5 bg-warning text-white rounded" style="height: 40px" id="nav-e3-tab" data-toggle="tab" href="#nav-e3" role="tab" aria-controls="nav-e3" aria-selected="false">(S6-S14) SCC</a>
+                                    <a class="nav-item nav-link shadow p-3 mb-5 bg-primary text-white rounded" style="height: 40px" id="nav-e4-tab" data-toggle="tab" href="#nav-e4" role="tab" aria-controls="nav-e4" aria-selected="false">(S15-18) Danos externos</a> 
+                                    <a class="nav-item nav-link shadow p-3 mb-5 bg-success text-white rounded" style="height: 40px" id="nav-e5-tab" data-toggle="tab" href="#nav-e5" role="tab" aria-controls="nav-e5" aria-selected="false">(S19) HTHA</a> 
+                                    <a class="nav-item nav-link shadow p-3 mb-5 bg-secondary text-white rounded" style="height: 40px" id="nav-e6-tab" data-toggle="tab" href="#nav-e6" role="tab" aria-controls="nav-e6" aria-selected="false">(S20-23) Fratura Frágil</a>  
+                                    <a class="nav-item nav-link shadow p-3 mb-5 bg-success text-white rounded" style="height: 40px" id="nav-e7-tab" data-toggle="tab" href="#nav-e7" role="tab" aria-controls="nav-e7" aria-selected="false">(S24) Fadiga</a>                              
+                                 </div>
+                            </nav>
+                            <div class="tab-content p-3" id="nav-tabContent">
+                                <div class="tab-pane fade show active" id="nav-e1" role="tabpanel" aria-labelledby="nav-e1-tab">
+                                       
+                                    <div class="container-md">
+                                        <div class="row g-0 p-0">
+                                            <div class="col-8 p-0">
+                                    
+                                                <div class="form-group row pt-0" style="height: 25px";>
+                                                    <label for="perdaesp" class="col-sm-5 col-form-label">Perda de espessura</label>
+                                                    <div class="col-sm-3">
+                                                        <select class="form-control form-control-2g" id="perdaesp">
+                                                            <option>Localizada</option>
+                                                            <option>Generalizada</option>
+                                                        </select>
+                                                    </div> 
+                                                </div> 
+                                                <div class="form-group row" style="height: 25px";>
+                                                    <label for="espemed" class="col-sm-5 col-form-label">Espessura medida (mm)</label>
+                                                    <div class="col-sm-3">
+                                                        <input type="text" class="form-control" id="espemed" placeholder="" onblur="calcular();" />
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="form-group row" style="height: 25px";>
+                                                    <label for="espereq" class="col-sm-5 col-form-label">Espessura mínima requerida (mm)</label>
+                                                    <div class="col-sm-3">
+                                                        <input type="text" class="form-control" id="espereq" placeholder="" onblur="calcular();" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row" style="height: 25px";>
+                                                    <label for="tolscad" class="col-sm-5 col-form-label">Tolerância de corrosão s/CAD (mm)</label>
+                                                    <div class="col-sm-3">
+                                                        <input type="text" class="form-control" id="tolscad" placeholder="" onblur="calcular();"/>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row" style="height: 25px";>
+                                                    <label for="tolccad" class="col-sm-5 col-form-label">Tolerância de corrosão c/CAD (mm)</label>
+                                                    <div class="col-sm-3">
+                                                        <input type="text" class="form-control" id="tolccad" placeholder="">
+                                                    </div>
+                                                </div>  
+
+                                                <div class="form-group row" style="height: 25px";>
+                                                    <label for="txcormetal" class="col-sm-5 col-form-label">Taxa de corrosão do metal base (mm/ano)</label>
+                                                    <div class="col-sm-3">
+                                                        <input type="text" class="form-control" id="txcormetal" placeholder=""onblur="calcular();"/>
+                                                    </div>
+                                                </div>  
+
+                                                <div class="form-group row" style="height: 25px";>
+                                                    <label for="txcorclad" class="col-sm-5 col-form-label">Taxa de corrosão para o CLAD (mm/ano)</label>
+                                                    <div class="col-sm-3">
+                                                        <input type="text" class="form-control" id="txcorclad" placeholder="">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row" style="height: 25px";>                                                 
+                                                    <label for="agetk" class="col-sm-5 col-form-label">agetk (Tempo desde a última ME)</label>
+                                                    <div class="col-sm-3">
+                                                        <input type="text" class="form-control" id="agetk" placeholder=""onblur="calcular();"/>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row" style="height: 25px";>                                                 
+                                                    <label for="agerc" class="col-sm-5 col-form-label">agerc (é a vida útil da cobertura de revest./soldag. associada à data da espes. inicial)</label>
+                                                    <div class="col-sm-3">
+                                                        <input type="text" class="form-control" id="agerc" placeholder="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4 p-0">                                       
+                                                <span><b>Cálculo da Art para fundo de tanque</b></span><br>
+                                                <span id="resultado"></span><br>
+                                                <span><b>Cálculo da Art para outros componentes sem CLAD</b></span><br>
+                                                <span id="resultado2"></span><br>
+                                                <span><b>Cálculo da Art para outros componentes com CLAD (agetk menor que agerc)</b></span><br>
+                                                <span id="resultado3"></span><br>
+                                                <span><b>Cálculo da Art para outros componentes com CLAD (agetk>=agerc)</b></span><br>
+                                                <span id="resultado4"></span><br>
+                                                <span><b>Cálculo do fator de dano para tanques</b></span><br>
+                                                <span id="resultado5"></span><br>
+                                                <span><b>Cálculo da Probabilidade</b></span><br>
+                                                <span><b>Cálculo da Tensão de fluxo (FS)</b></span><br>
+                                                <span id="resultado6"></span><br>
+                                                <span><b>Cálculo da razão de tensão (SR) = MAX(SR1,SR12)</b></span><br>
+                                                <span>SR1</span><br>
+                                                <span id="resultado7"></span><br>
+                                                <span>Alpha</span><br>
+                                                <span id="resultado8"></span><br>
+                                                <span>SR12</span><br>
+                                                <span id="resultado9"></span><br>
+                                                <span><b>Cálculo dos fatores de efetividade de inspeção ITHIN1, ITHIN2, ITHIN3</b></span><br>
+                                                <span><b>Probabilidade Condicional</b></span><br>
+                                                <span>ITHIN1 = </span><span id="resultado10"></span><br>
+                                                <span>ITHIN2 = </span><span id="resultado11"></span><br>
+                                                <span>ITHIN3 = </span><span id="resultado12"></span><br>
+                                                <span><b>Cálculo da Probabilidade posterior usando ITHIN1, ITHIN2, ITHIN3</b></span><br>
+                                                <span>PoTHINp1 = </span><span id="resultado13"></span><br>
+                                                <span>PoTHINp2 = </span><span id="resultado14"></span><br>
+                                                <span>PoTHINp3 = </span><span id="resultado15"></span><br>
+                                                <span><b>Cálculo da Parametros BetaTHIN1, BetaTHIN2, BetlaTHIN3</b></span><br>
+                                                <span>PoTHINp1 = </span><span id="resultado16"></span><br>
+                                                <span>PoTHINp2 = </span><span id="resultado17"></span><br>
+                                                <span>PoTHINp3 = </span><span id="resultado18"></span><br>
+                                                <span><b>Cálculo do fator de dano base</b></span><br>
+                                                <span>DTHINfb = </span><span id="resultado19"></span><br>
+                                                <span><b>Aplicando fatores de correção</b></span><br>
+                                                <span>DTHINf=MAX((DTHIN*FIP*FDL*FWD*FAM*FSM/FOM),0,1)</span><br>
+                                                <span>FIP (Fatorpara ponto de injeção) </span><span id="resultado20"></span><br>
+                                                <span>FDL (fator para Deadleg) </span><span id="resultado21"></span><br>
+                                                <span>FWD (fator para construção soldada) </span><span id="resultado22"></span><br>
+                                                <span>FAM (Fator para manutenção conforme norma) </span><span id="resultado23"></span><br>
+                                                <span>FSM (Fator para fundação no caso de tanque) </span><span id="resultado24"></span><br>
+                                                <span>FOM (Fator para monitoramento on-line) </span><span id="resultado25"></span><br>
+                                                <span><b>Dano projetado para a data do RBI = </b></span><br>
+                                                <span id="resultado26"></span><br>
+                                                <span><b>Cálculo da Probabilidade de Falha = </b></span><br>
+                                                <span id="resultado27"></span><br>
+                                            </div>
+                                         </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="nav-e2" role="tabpanel" aria-labelledby="nav-e2-tab">
+                                    
+                                    <div class="container-md">
+                                        <div class="row g-0 p-0">
+                                            <div class="col-8 p-0">
+                                                <div class="form-group row pt-0" style="height: 25px";>
+                                                    <label for="linning" class="col-sm-3 col-form-label">Linnig (Orgânico/Inorgânico)</label>
+                                                    <div class="col-sm-3">
+                                                        <select class="form-control form-control-2g" id="linning">
+                                                            <option>Orgânico</option>
+                                                            <option>Inorgânico</option>
+                                                        </select>
+                                                    </div> 
+                                                </div> 
+
+                                            <div class="form-group row pt-0" style="height: 25px";>
+                                                <label for="tipolinning" class="col-sm-3 col-form-label">Tipo de Linnig </label>
+                                                <div class="col-sm-3">
+                                                    <select class="form-control form-control-2g" id="tipolinning">
+                                                        <option>Strip Lined Alloy</option>
+                                                        <option>Castable refractory</option>
+                                                        <option>Cast. refractory sev. Conditions</option>
+                                                        <option>Glass Lined</option>
+                                                        <option>Acid Brick</option>
+                                                        <option>Fiberglass</option>
+                                                    </select>
+                                                </div> 
+                                            </div> 
+
+                                            <div class="form-group row pt-0" style="height: 25px";>
+                                                <label for="quallinning" class="col-sm-3 col-form-label">Qualidade do Linnig, se orgânico</label>
+                                                <div class="col-sm-3">
+                                                    <select class="form-control form-control-2g" id="quallinning">
+                                                        <option>Pobre</option>
+                                                        <option>Médio</option>
+                                                        <option>Bom</option>
+                                                    </select>
+                                                </div> 
+                                            </div>
+                                        </div>
+                                   
+                                            <div class="col-4 p-0">
+                                                
+                                                <div class="mxgraph" style="max-width:100%;border:1px solid transparent;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;nav&quot;:true,&quot;resize&quot;:true,&quot;toolbar&quot;:&quot;zoom layers tags lightbox&quot;,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; agent=\&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36\&quot; version=\&quot;24.7.12\&quot;&gt;\n  &lt;diagram name=\&quot;Page-1\&quot; id=\&quot;edf60f1a-56cd-e834-aa8a-f176f3a09ee4\&quot;&gt;\n    &lt;mxGraphModel dx=\&quot;1079\&quot; dy=\&quot;447\&quot; grid=\&quot;1\&quot; gridSize=\&quot;10\&quot; guides=\&quot;1\&quot; tooltips=\&quot;1\&quot; connect=\&quot;1\&quot; arrows=\&quot;1\&quot; fold=\&quot;1\&quot; page=\&quot;1\&quot; pageScale=\&quot;1\&quot; pageWidth=\&quot;1100\&quot; pageHeight=\&quot;850\&quot; background=\&quot;none\&quot; math=\&quot;0\&quot; shadow=\&quot;0\&quot;&gt;\n      &lt;root&gt;\n        &lt;mxCell id=\&quot;0\&quot; /&gt;\n        &lt;mxCell id=\&quot;1\&quot; parent=\&quot;0\&quot; /&gt;\n        &lt;mxCell id=\&quot;DCbc7HNY3uvMJjkibcHQ-19\&quot; value=\&quot;\&quot; style=\&quot;rounded=0;whiteSpace=wrap;html=1;align=left;\&quot; vertex=\&quot;1\&quot; parent=\&quot;1\&quot;&gt;\n          &lt;mxGeometry x=\&quot;300\&quot; y=\&quot;410\&quot; width=\&quot;360\&quot; height=\&quot;230\&quot; as=\&quot;geometry\&quot; /&gt;\n        &lt;/mxCell&gt;\n        &lt;mxCell id=\&quot;DCbc7HNY3uvMJjkibcHQ-15\&quot; style=\&quot;edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;\&quot; edge=\&quot;1\&quot; parent=\&quot;1\&quot; source=\&quot;DCbc7HNY3uvMJjkibcHQ-1\&quot;&gt;\n          &lt;mxGeometry relative=\&quot;1\&quot; as=\&quot;geometry\&quot;&gt;\n            &lt;mxPoint x=\&quot;280\&quot; y=\&quot;340\&quot; as=\&quot;targetPoint\&quot; /&gt;\n          &lt;/mxGeometry&gt;\n        &lt;/mxCell&gt;\n        &lt;mxCell id=\&quot;DCbc7HNY3uvMJjkibcHQ-1\&quot; value=\&quot;Tipo de Lining\&quot; style=\&quot;shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;\&quot; vertex=\&quot;1\&quot; parent=\&quot;1\&quot;&gt;\n          &lt;mxGeometry x=\&quot;100\&quot; y=\&quot;240\&quot; width=\&quot;140\&quot; height=\&quot;50\&quot; as=\&quot;geometry\&quot; /&gt;\n        &lt;/mxCell&gt;\n        &lt;mxCell id=\&quot;DCbc7HNY3uvMJjkibcHQ-13\&quot; style=\&quot;edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;\&quot; edge=\&quot;1\&quot; parent=\&quot;1\&quot; source=\&quot;DCbc7HNY3uvMJjkibcHQ-2\&quot; target=\&quot;DCbc7HNY3uvMJjkibcHQ-5\&quot;&gt;\n          &lt;mxGeometry relative=\&quot;1\&quot; as=\&quot;geometry\&quot;&gt;\n            &lt;mxPoint x=\&quot;280\&quot; y=\&quot;345\&quot; as=\&quot;targetPoint\&quot; /&gt;\n          &lt;/mxGeometry&gt;\n        &lt;/mxCell&gt;\n        &lt;mxCell id=\&quot;DCbc7HNY3uvMJjkibcHQ-2\&quot; value=\&quot;Anos desde a&amp;lt;div&amp;gt;inspeção&amp;lt;div&amp;gt;(ref. Tabela 2.C.6.1)&amp;lt;/div&amp;gt;&amp;lt;/div&amp;gt;\&quot; style=\&quot;shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;\&quot; vertex=\&quot;1\&quot; parent=\&quot;1\&quot;&gt;\n          &lt;mxGeometry x=\&quot;100\&quot; y=\&quot;320\&quot; width=\&quot;140\&quot; height=\&quot;50\&quot; as=\&quot;geometry\&quot; /&gt;\n        &lt;/mxCell&gt;\n        &lt;mxCell id=\&quot;DCbc7HNY3uvMJjkibcHQ-14\&quot; style=\&quot;edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;\&quot; edge=\&quot;1\&quot; parent=\&quot;1\&quot; source=\&quot;DCbc7HNY3uvMJjkibcHQ-3\&quot;&gt;\n          &lt;mxGeometry relative=\&quot;1\&quot; as=\&quot;geometry\&quot;&gt;\n            &lt;mxPoint x=\&quot;280\&quot; y=\&quot;350\&quot; as=\&quot;targetPoint\&quot; /&gt;\n          &lt;/mxGeometry&gt;\n        &lt;/mxCell&gt;\n        &lt;mxCell id=\&quot;DCbc7HNY3uvMJjkibcHQ-3\&quot; value=\&quot;Para pinturas&amp;lt;div&amp;gt;orgânicas,&amp;lt;div&amp;gt;anos em serviço&amp;lt;/div&amp;gt;&amp;lt;/div&amp;gt;\&quot; style=\&quot;shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;\&quot; vertex=\&quot;1\&quot; parent=\&quot;1\&quot;&gt;\n          &lt;mxGeometry x=\&quot;100\&quot; y=\&quot;400\&quot; width=\&quot;140\&quot; height=\&quot;50\&quot; as=\&quot;geometry\&quot; /&gt;\n        &lt;/mxCell&gt;\n        &lt;mxCell id=\&quot;DCbc7HNY3uvMJjkibcHQ-16\&quot; style=\&quot;edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;\&quot; edge=\&quot;1\&quot; parent=\&quot;1\&quot; source=\&quot;DCbc7HNY3uvMJjkibcHQ-4\&quot; target=\&quot;DCbc7HNY3uvMJjkibcHQ-5\&quot;&gt;\n          &lt;mxGeometry relative=\&quot;1\&quot; as=\&quot;geometry\&quot; /&gt;\n        &lt;/mxCell&gt;\n        &lt;mxCell id=\&quot;DCbc7HNY3uvMJjkibcHQ-4\&quot; value=\&quot;PASSO 1: Determine o tipo de&amp;lt;div&amp;gt;Lining e tempo em serviço&amp;lt;/div&amp;gt;\&quot; style=\&quot;rounded=1;whiteSpace=wrap;html=1;\&quot; vertex=\&quot;1\&quot; parent=\&quot;1\&quot;&gt;\n          &lt;mxGeometry x=\&quot;370\&quot; y=\&quot;200\&quot; width=\&quot;210\&quot; height=\&quot;50\&quot; as=\&quot;geometry\&quot; /&gt;\n        &lt;/mxCell&gt;\n        &lt;mxCell id=\&quot;DCbc7HNY3uvMJjkibcHQ-17\&quot; style=\&quot;edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;\&quot; edge=\&quot;1\&quot; parent=\&quot;1\&quot; source=\&quot;DCbc7HNY3uvMJjkibcHQ-5\&quot; target=\&quot;DCbc7HNY3uvMJjkibcHQ-6\&quot;&gt;\n          &lt;mxGeometry relative=\&quot;1\&quot; as=\&quot;geometry\&quot; /&gt;\n        &lt;/mxCell&gt;\n        &lt;mxCell id=\&quot;DCbc7HNY3uvMJjkibcHQ-5\&quot; value=\&quot;PASSO 2: Determine o valor base do fator de dano do Lining, usando as tabelas 5.4 e 5.5\&quot; style=\&quot;rounded=1;whiteSpace=wrap;html=1;\&quot; vertex=\&quot;1\&quot; parent=\&quot;1\&quot;&gt;\n          &lt;mxGeometry x=\&quot;340\&quot; y=\&quot;315\&quot; width=\&quot;270\&quot; height=\&quot;60\&quot; as=\&quot;geometry\&quot; /&gt;\n        &lt;/mxCell&gt;\n        &lt;mxCell id=\&quot;DCbc7HNY3uvMJjkibcHQ-18\&quot; style=\&quot;edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;\&quot; edge=\&quot;1\&quot; parent=\&quot;1\&quot; source=\&quot;DCbc7HNY3uvMJjkibcHQ-6\&quot; target=\&quot;DCbc7HNY3uvMJjkibcHQ-7\&quot;&gt;\n          &lt;mxGeometry relative=\&quot;1\&quot; as=\&quot;geometry\&quot; /&gt;\n        &lt;/mxCell&gt;\n        &lt;mxCell id=\&quot;DCbc7HNY3uvMJjkibcHQ-6\&quot; value=\&quot;Determine os fatores de ajuste:&amp;lt;div&amp;gt;- Condição do Lining&amp;lt;/div&amp;gt;&amp;lt;div&amp;gt;- Monitoramento on-line&amp;lt;/div&amp;gt;\&quot; style=\&quot;rounded=1;whiteSpace=wrap;html=1;\&quot; vertex=\&quot;1\&quot; parent=\&quot;1\&quot;&gt;\n          &lt;mxGeometry x=\&quot;340\&quot; y=\&quot;440\&quot; width=\&quot;270\&quot; height=\&quot;60\&quot; as=\&quot;geometry\&quot; /&gt;\n        &lt;/mxCell&gt;\n        &lt;mxCell id=\&quot;DCbc7HNY3uvMJjkibcHQ-7\&quot; value=\&quot;Determine o fator de dano para&amp;amp;nbsp;&amp;lt;span style=&amp;quot;background-color: initial;&amp;quot;&amp;gt;o&amp;amp;nbsp;&amp;lt;/span&amp;gt;&amp;lt;div&amp;gt;&amp;lt;span style=&amp;quot;background-color: initial;&amp;quot;&amp;gt;Lining usando a equação (2.24)&amp;lt;/span&amp;gt;&amp;lt;/div&amp;gt;\&quot; style=\&quot;rounded=1;whiteSpace=wrap;html=1;\&quot; vertex=\&quot;1\&quot; parent=\&quot;1\&quot;&gt;\n          &lt;mxGeometry x=\&quot;340\&quot; y=\&quot;540\&quot; width=\&quot;270\&quot; height=\&quot;60\&quot; as=\&quot;geometry\&quot; /&gt;\n        &lt;/mxCell&gt;\n        &lt;mxCell id=\&quot;DCbc7HNY3uvMJjkibcHQ-21\&quot; value=\&quot;Passo 3\&quot; style=\&quot;text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;\&quot; vertex=\&quot;1\&quot; parent=\&quot;1\&quot;&gt;\n          &lt;mxGeometry x=\&quot;300\&quot; y=\&quot;410\&quot; width=\&quot;60\&quot; height=\&quot;30\&quot; as=\&quot;geometry\&quot; /&gt;\n        &lt;/mxCell&gt;\n      &lt;/root&gt;\n    &lt;/mxGraphModel&gt;\n  &lt;/diagram&gt;\n&lt;/mxfile&gt;\n&quot;}"></div>
+                                                <script type="text/javascript" src="https://viewer.diagrams.net/js/viewer-static.min.js"></script>
+
+                                                
+                                            </div>
+                                    </div>  
+                                </div>      
+                            </div>
+                                <div class="tab-pane fade" id="nav-e3" role="tabpanel" aria-labelledby="nav-e3-tab">
+                                    
+                                        <nav>
+                                            <div class="nav nav-tabs pt-1" id="nav-tab" role="tablist" style="height: 50px">
+                                                <a class="nav-item nav-link active shadow p-3 mb-5 bg-warning text-white rounded" style="height: 40px" id="nav-e31-tab" data-toggle="tab" href="#nav-e31" role="tab" aria-controls="nav-e31" aria-selected="true">(S6) Caustic</a>
+                                                <a class="nav-item nav-link shadow p-3 mb-5 bg-warning text-white rounded" style="height: 40px" id="nav-e32-tab" data-toggle="tab" href="#nav-e32" role="tab" aria-controls="nav-e32" aria-selected="false">(S7) Amina</a>
+                                                <a class="nav-item nav-link shadow p-3 mb-5 bg-warning text-white rounded" style="height: 40px" id="nav-e33-tab" data-toggle="tab" href="#nav-e33" role="tab" aria-controls="nav-e33" aria-selected="false">(S8) SCC</a>
+                                                <a class="nav-item nav-link shadow p-3 mb-5 bg-warning text-white rounded" style="height: 40px" id="nav-e34-tab" data-toggle="tab" href="#nav-e34" role="tab" aria-controls="nav-e34" aria-selected="false">(S9) HISOHICH2</a>
+                                                <a class="nav-item nav-link shadow p-3 mb-5 bg-warning text-white rounded" style="height: 40px" id="nav-e35-tab" data-toggle="tab" href="#nav-e35" role="tab" aria-controls="nav-e35" aria-selected="false">(S10) ACSCC</a>
+                                                <a class="nav-item nav-link shadow p-3 mb-5 bg-warning text-white rounded" style="height: 40px" id="nav-e36-tab" data-toggle="tab" href="#nav-e36" role="tab" aria-controls="nav-e36" aria-selected="false">(S11) PACSCC</a>
+                                                <a class="nav-item nav-link shadow p-3 mb-5 bg-warning text-white rounded" style="height: 40px" id="nav-e37-tab" data-toggle="tab" href="#nav-e37" role="tab" aria-controls="nav-e37" aria-selected="false">(S12) CLSCC</a> 
+                                                <a class="nav-item nav-link shadow p-3 mb-5 bg-warning text-white rounded" style="height: 40px" id="nav-e38-tab" data-toggle="tab" href="#nav-e38" role="tab" aria-controls="nav-e38" aria-selected="false">(S13) HSCHF</a> 
+                                                <a class="nav-item nav-link shadow p-3 mb-5 bg-warning text-white rounded" style="height: 40px" id="nav-e39-tab" data-toggle="tab" href="#nav-e39" role="tab" aria-controls="nav-e39" aria-selected="false">(S14) HICSO/HICHF</a> 
+                                            </div>
+                                        </nav>
+                                        <div class="tab-content" id="nav-tabContent">
+                                            <div class="tab-pane fade show active" id="nav-e31" role="tabpanel" aria-labelledby="nav-e31-tab">
+                                                                                                  
+                                                <div class="container-md">
+                                                    <div class="row g-0 p-0">
+                                                        <div class="col-8 p-0">
+
+                                                            <div class="form-group row" style="height: 25px";>
+                                                                <label for="connaoh" class="col-sm-3 col-form-label">Concentração de NaOH(%)</label>
+                                                                <div class="col-sm-3">
+                                                                    <input type="text" class="form-control" id="connaoh" placeholder="">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group row pt-0" style="height: 25px";>
+                                                                <label for="areacurva" class="col-sm-3 col-form-label">Área A, B ou C, conforme Figura 6.1M</label>
+                                                                <div class="col-sm-3">
+                                                                    <select class="form-control form-control-2g" id="areacurva">
+                                                                        <option>A</option>
+                                                                        <option>B</option>
+                                                                        <option>C</option>
+                                                                    </select>
+                                                                </div> 
+                                                        </div>
+                                                    </div> 
+                                                </div> 
+                                            </div> 
+                                     
+                                            </div>
+                                            <div class="tab-pane fade" id="nav-e32" role="tabpanel" aria-labelledby="nav-e32-tab">
+                                            
+                                                <div class="container-md">
+                                                    <div class="row g-0 p-0">
+                                                        <div class="col-8 p-0">
+
+                                                            <div class="form-group row pt-0" style="height: 25px";>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input ml-1" type="checkbox" value="" id="expamina">
+                                                                    <label class="form-check-label ml-4" for="expamina">
+                                                                        Exposto à Amina Magra
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group row pt-0" style="height: 25px";>
+                                                                <label for="meadipadeca" class="col-sm-3 col-form-label">Exposição a MEA,  DIPA ou DEA.</label>
+                                                                <div class="col-sm-3">
+                                                                    <select class="form-control form-control-2g" id="meadipadeca">
+                                                                        <option>MEA</option>
+                                                                        <option>DIPA</option>
+                                                                        <option>DEA</option>
+                                                                        <option>Não</option>
+                                                                    </select>
+                                                                </div> 
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="tab-pane fade" id="nav-e33" role="tabpanel" aria-labelledby="nav-e33-tab">
+                                            
+                                                <div class="container-md">
+                                                    <div class="row g-0 p-0">
+                                                        <div class="col-8 p-0">
+
+                                                            <div class="form-check">
+                                                                <input class="form-check-input ml-1 " type="checkbox" value="" id="presh2o">
+                                                                <label class="form-check-label ml-4" for="presh2o">
+                                                                    Presença de H2O  
+                                                                </label>
+                                                            </div>
+
+                                                            <div class="form-check">
+                                                                <input class="form-check-input ml-1 " type="checkbox" value="" id="h2sh2o">
+                                                                <label class="form-check-label ml-4" for="h2sh2o">
+                                                                    Contém H2S na H2O  
+                                                                </label>
+                                                            </div>
+                                                            
+                                                            <div class="form-group row" style="height: 25px";>
+                                                                <label for="ppmh2sh2o" class="col-sm-3 col-form-label">PPM H2S na H2O</label>
+                                                                <div class="col-sm-3">
+                                                                    <input type="text" class="form-control" id="ppmh2sh2o" placeholder="">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group row" style="height: 25px";>
+                                                                <label for="phh2o" class="col-sm-3 col-form-label">PH da H2O</label>
+                                                                <div class="col-sm-3">
+                                                                    <input type="text" class="form-control" id="phh2o" placeholder="">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-check">
+                                                                <input class="form-check-input ml-1 " type="checkbox" value="" id="prescian">
+                                                                <label class="form-check-label ml-4" for="prescian">
+                                                                    Presença de cianeto  
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                                                                
+                                            </div>
+
+                                            <div class="tab-pane fade" id="nav-e34" role="tabpanel" aria-labelledby="nav-e34-tab">
+                                                                                                
+                                                <div class="container-md">
+                                                    <div class="row g-0 p-0">
+                                                        <div class="col-8 p-0">
+
+                                                            <div class="form-check">
+                                                                <input class="form-check-input ml-1" type="checkbox" value="" id="temtrinca">
+                                                                <label class="form-check-label ml-4" for="Temtrinca">
+                                                                        Existe trinca
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="tab-pane fade" id="nav-e35" role="tabpanel" aria-labelledby="nav-e35-tab">
+                                                                 
+                                                <div class="container-md">
+                                                    <div class="row g-0 p-0">
+                                                        <div class="col-8 p-0">
+
+                                                            <div class="form-group row" style="height: 25px";>
+                                                                <label for="conco3" class="col-sm-3 col-form-label">Concentração de CO3 na água (%)</label>
+                                                                <div class="col-sm-3">
+                                                                        <input type="text" class="form-control" id="conco3" placeholder="">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                           
+                                            <div class="tab-pane fade" id="nav-e36" role="tabpanel" aria-labelledby="nav-e36-tab">
+                                            
+                                                <div class="container-md">
+                                                    <div class="row g-0 p-0">
+                                                        <div class="col-8 p-0">
+
+                                                            <div class="form-check">
+                                                                <input class="form-check-input ml-1" type="checkbox" value="" id="exps">
+                                                                <label class="form-check-label ml-4" for="exps">
+                                                                    Exposição de enxofre durante a operação
+                                                                </label>
+                                                            </div>
+
+                                                            <div class="form-check">
+                                                                <input class="form-check-input ml-1" type="checkbox" value="" id="expo2">
+                                                                <label class="form-check-label ml-4" for="expo2">
+                                                                    Exposição de O2 durante a operação
+                                                                </label>
+                                                            </div>
+                                                            
+                                                            <div class="form-check">
+                                                                <input class="form-check-input ml-1" type="checkbox" value="" id="expoh2o">
+                                                                <label class="form-check-label ml-4" for="expoh2o">
+                                                                    Exposição a H2O durante a operação
+                                                                </label>
+                                                            </div>  
+                                                        </div>
+                                                    </div>
+                                                </div>                                             
+                                            </div>
+
+                                            <div class="tab-pane fade" id="nav-e37" role="tabpanel" aria-labelledby="nav-e37-tab">
+                                                
+                                                <div class="container-md">
+                                                    <div class="row g-0 p-0">
+                                                        <div class="col-8 p-0">
+
+                                                            <div class="form-group row">
+                                                                <label for="inputEmail3" class="col-sm-4 col-form-label">Exposição ao cloreto (ppm)</label>
+                                                                <div class="col-sm-2">
+                                                                    <input type="text" class="form-control" id="inputEmail3" placeholder="">
+                                                                </div>
+                                                            </div>
+                                                                                                                                                                        
+                                                            <div class="form-check">
+                                                                <input class="form-check-input ml-1" type="checkbox" value="" id="tipoaco">
+                                                                <label class="form-check-label ml-4" for="tipoaco">
+                                                                    Aço inox austenítico
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="tab-pane fade" id="nav-e38" role="tabpanel" aria-labelledby="nav-e38-tab">
+                                            
+                                                <div class="container-md">
+                                                    <div class="row g-0 p-0">
+                                                        <div class="col-8 p-0">
+
+                                                            <div class="form-check">
+                                                                <input class="form-check-input ml-1" type="checkbox" value="" id="preshf">
+                                                                <label class="form-check-label ml-4" for="preshf">
+                                                                    Presença de HF
+                                                                </label>
+                                                            </div>
+                                                        
+                                                            <div class="form-group row">                                                 
+                                                                <label for="dureza" class="col-sm-3 col-form-label">Dureza Brinel</label>
+                                                                <div class="col-sm-3">
+                                                                    <input type="text" class="form-control" id="dureza" placeholder="">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                                
+                                            <div class="tab-pane fade" id="nav-e39" role="tabpanel" aria-labelledby="nav-e39-tab">
+                    
+                                                <div class="container-md">
+                                                    <div class="row g-0 p-0">
+                                                        <div class="col-8 p-0">
+
+                                                            <div class="form-group row" style="height: 25px";>
+                                                                <label for="matchaptubo" class="col-sm-3 col-form-label">O Material é chapa ou tubo</label>
+                                                                <div class="col-sm-3">
+                                                                    <select class="form-control form-control-2g" id="matchaptubo">
+                                                                        <option>Chapa</option>
+                                                                        <option>Tubo</option>
+                                                                    </select>
+                                                                </div> 
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>                                      
+                                <div class="tab-pane fade" id="nav-e4" role="tabpanel" aria-labelledby="nav-e4-tab">
+                                                   
+                                    <nav>
+                                        <div class="nav nav-tabs pt-1" id="nav-tab" role="tablist" style="height: 50px">
+                                            <a class="nav-item nav-link active shadow p-3 mb-5 bg-primary text-white rounded" style="height: 40px" id="nav-e41-tab" data-toggle="tab" href="#nav-e41" role="tab" aria-controls="nav-e41" aria-selected="true">(S15) EXTC</a>
+                                            <a class="nav-item nav-link shadow p-3 mb-5 bg-primary text-white rounded" style="height: 40px" id="nav-e42-tab" data-toggle="tab" href="#nav-e42" role="tab" aria-controls="nav-e42" aria-selected="false">(S16) CUIF</a>
+                                            <a class="nav-item nav-link shadow p-3 mb-5 bg-primary text-white rounded" style="height: 40px" id="nav-e43-tab" data-toggle="tab" href="#nav-e43" role="tab" aria-controls="nav-e43" aria-selected="false">(S17) EXTCLSCC</a>
+                                            <a class="nav-item nav-link shadow p-3 mb-5 bg-primary text-white rounded" style="height: 40px" id="nav-e44-tab" data-toggle="tab" href="#nav-e44" role="tab" aria-controls="nav-e44" aria-selected="false">(S18) CUICLSCC</a>
+                                        </div>
+                                    </nav>
+                                    <div class="tab-content" id="nav-tabContent">
+                                        <div class="tab-pane fade show active" id="nav-e41" role="tabpanel" aria-labelledby="nav-e41-tab">
+                                           
+                                            <div class="container-md">
+                                                <div class="row g-0 p-0">
+                                                    <div class="col-8 p-0">
+
+                                                        <div class="form-group row pt-0" style="height: 25px";>
+                                                            <label for="inputEmail3" class="col-sm-3 col-form-label">Presença de H2O</label>
+                                                            <div class="col-sm-3">
+                                                                <select class="form-control form-control-2g">
+                                                                    <option>Sim</option>
+                                                                    <option>Não</option>
+                                                                </select>
+                                                            </div> 
+                                                        </div> 
+                                                        
+                                                        <div class="form-group row pt-0" style="height: 25px";>
+                                                            <label for="inputEmail3" class="col-sm-3 col-form-label">Contem H2S na H2O</label>
+                                                            <div class="col-sm-3">
+                                                                <select class="form-control form-control-2g">
+                                                                    <option>Sim</option>
+                                                                    <option>Não</option>
+                                                                </select>
+                                                            </div> 
+                                                        </div> 
+                                                        
+
+                                                        <div class="form-group row" style="height: 25px";>                                                 
+                                                            <label for="inputEmail3" class="col-sm-3 col-form-label">PPM H2S na H2O</label>
+                                                            <div class="col-sm-3">
+                                                                <input type="text" class="form-control" id="inputEmail3" placeholder="">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-check">
+                                                            <input class="form-check-input ml-1" type="checkbox" value="" id="flexCheckDefault">
+                                                            <label class="form-check-label ml-4" for="flexCheckDefault">
+                                                                Componente sem costura (solda)
+                                                            </label>
+                                                        </div>
+                                                        
+                                                        <div class="form-group row" style="height: 25px";>                                                 
+                                                            <label for="inputEmail3" class="col-sm-3 col-form-label">pH da H2O</label>
+                                                            <div class="col-sm-3">
+                                                                <input type="text" class="form-control" id="inputEmail3" placeholder="">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row" style="height: 25px";>                                                 
+                                                            <label for="inputEmail3" class="col-sm-3 col-form-label">% de S no aço</label>
+                                                            <div class="col-sm-3">
+                                                                <input type="text" class="form-control" id="inputEmail3" placeholder="">
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="form-check">
+                                                            <input class="form-check-input ml-1" type="checkbox" value="" id="flexCheckDefault">
+                                                            <label class="form-check-label ml-4" for="flexCheckDefault">
+                                                                O compoente tem tratamento térmico
+                                                            </label>
+                                                        </div>
+                                                        
+                                                        <div class="form-check">
+                                                            <input class="form-check-input ml-1" type="checkbox" value="" id="flexCheckDefault">
+                                                            <label class="form-check-label ml-4" for="flexCheckDefault">
+                                                                Existe trinca
+                                                            </label>
+                                                        </div>
+                                                        
+                                                        <div class="form-check">
+                                                            <input class="form-check-input ml-1" type="checkbox" value="" id="flexCheckDefault">
+                                                            <label class="form-check-label ml-4" for="flexCheckDefault">
+                                                                Presença de cianeto
+                                                            </label>
+                                                        </div>
+                                                        
+                                                        <div class="form-group row" style="height: 25px";>
+                                                            <label for="inputEmail3" class="col-sm-3 col-form-label">Tem monitoramento on-line</label>
+                                                            <div class="col-sm-3">
+                                                                <select class="form-control form-control-2g">
+                                                                    <option>Nenhum</option>
+                                                                    <option>Amina</option>
+                                                                    <option>H2S</option>
+                                                                    <option>Hf</option>
+                                                                </select>
+                                                            </div> 
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>                                                                         
+                                        </div>
+                                        <div class="tab-pane fade" id="nav-e42" role="tabpanel" aria-labelledby="nav-e32-tab">
+                                        
+                                            <div class="container-md">
+                                                <div class="row g-0 p-0">
+                                                    <div class="col-8 p-0">
+
+                                                        <div class="form-group row" style="height: 25px";>
+                                                            <label for="tipoisol" class="col-sm-3 col-form-label">Tipo de isolamento</label>
+                                                            <div class="col-sm-3">
+                                                                <select class="form-control form-control-2g" id="tipoisol">
+                                                                    <option>Não especificado</option>
+                                                                    <option>Foamglass</option>
+                                                                    <option>PearliteS</option>
+                                                                    <option>Fiberglass</option>
+                                                                    <option>Mineral Wool</option>
+                                                                    <option>Calcium Silicate</option>
+                                                                    <option>Asbestos</option>
+                                                                </select>
+                                                            </div> 
+                                                        </div>
+
+                                                        <div class="form-group row" style="height: 25px";>
+                                                            <label for="qualisol" class="col-sm-3 col-form-label">Qualidade do isolamento</label>
+                                                            <div class="col-sm-3">
+                                                                <select class="form-control form-control-2g" id="qualisol">
+                                                                    <option>acima da média</option>
+                                                                    <option>média</option>
+                                                                    <option>abaixo da média</option>
+                                                                </select>
+                                                            </div> 
+                                                        </div>
+
+                                                        <div class="form-group row" style="height: 25px";>
+                                                            <label for="qualipint" class="col-sm-3 col-form-label">Qualidade da pintura do componente</label>
+                                                            <div class="col-sm-3">
+                                                                <select class="form-control form-control-2g" id="qualipint">
+                                                                    <option>Sem pintura ou primer</option>
+                                                                    <option>Média (simples camada epoxy)</option>
+                                                                    <option>Alta (Multi coat epoxy)</option>
+                                                                </select>
+                                                            </div> 
+                                                        </div>
+                                                        
+                                                        <div class="form-group row" style="height: 25px";>
+                                                            <label for="projetocont" class="col-sm-3 col-form-label">Projeto do equipamento contemplamponente</label>
+                                                            <div class="col-sm-3">
+                                                                <select class="form-control form-control-2g" id="projetocont">
+                                                                    <option>Sim</option>
+                                                                    <option>Não</option>
+                                                                </select>
+                                                            </div> 
+                                                        </div>
+                                                        <div class="form-group row" style="height: 25px";>
+                                                            <label for="interface" class="col-sm-3 col-form-label">Tem interface com solo ou água?</label>
+                                                            <div class="col-sm-3">
+                                                                <select class="form-control form-control-2g" id="interface">
+                                                                    <option>Sim</option>
+                                                                    <option>Não</option>
+                                                                </select>
+                                                            </div> 
+                                                        </div>
+
+                                                        <div class="form-group row pt-0" style="height: 25px";>
+                                                            <label for="datapint" class="col-sm-3 col-form-label" >Data de instalação da pintura</label>
+                                                            <div class="col-sm-3">
+                                                                <input type="date" class="form-control col-form-label" id="datapint" placeholder="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    
+                                        </div>
+                                        <div class="tab-pane fade" id="nav-e43" role="tabpanel" aria-labelledby="nav-e33-tab">
+                                        
+                                            <div class="container-md">
+                                                <div class="row g-0 p-0">
+                                                    <div class="col-8 p-0">
+
+                                                        <div class="form-group row" style="height: 25px";>
+                                                            <label for="driver" class="col-sm-3 col-form-label">Driver</label>
+                                                            <div class="col-sm-5">
+                                                                <select class="form-control form-control-2g" id="driver">
+                                                                    <option>Ambiente marinho ou próximo de torre de resfriamento</option>
+                                                                    <option>Temperado</option>
+                                                                    <option>Árido</option>
+                                                                    <option>Severo</option>
+                                                                </select>
+                                                            </div> 
+                                                        </div>
+
+                                                        <div class="form-group row" style="height: 25px";>
+                                                            <label for="tempope" class="col-sm-3 col-form-label">Temperatura de operação</label>
+                                                            <div class="col-sm-5">
+                                                                <select class="form-control form-control-2g" id="tempope">
+                                                                    <option>menor que 49 &#186C></option>
+                                                                    <option>entre 49 e 93 &#186C</option>
+                                                                    <option>entre 93 e 149 &#186C</option>
+                                                                    <option>acima de 149 &#186C</option>
+                                                                </select>
+                                                            </div> 
+                                                        </div>
+
+                                                        <div class="form-group row" style="height: 25px";>
+                                                            <label for="dataultinspextclscc" class="col-sm-3 col-form-label" >Data de instalação do componente ou última inspeção do sistema</label>
+                                                            <div class="col-sm-5">
+                                                                <input type="date" class="form-control col-form-label" id="dataultinspextclscc" placeholder="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>                                            
+                                        </div>
+                                        <div class="tab-pane fade" id="nav-e44" role="tabpanel" aria-labelledby="nav-e34-tab">
+                                        
+                                            Os mesmos já contemplados em EXTCLSCC
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="nav-e5" role="tabpanel" aria-labelledby="nav-e5-tab">
+      
+                                    <div class="container-md">
+                                        <div class="row g-0 p-0">
+                                            <div class="col-8 p-0">
+
+                                                <div class="form-group row" style="height: 25px";>                                                 
+                                                        <label for="materialcomp" class="col-sm-4 col-form-label">Material</label>
+                                                        <div class="col-sm-3">
+                                                            <input type="text" class="form-control" id="materialcomp" placeholder="">
+                                                        </div>
+                                                </div>
+
+                                                <div class="form-group row" style="height: 25px";>                                                 
+                                                    <label for="tempope" class="col-sm-4 col-form-label">Temperatura de exposição (&#186C)</label>
+                                                    <div class="col-sm-3">
+                                                        <input type="text" class="form-control" id="tempope" placeholder="">
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="form-group row" style="height: 25px";>                                                 
+                                                    <label for="preparh2" class="col-sm-4 col-form-label">Pressão parcial de H2 (psia)</label>
+                                                    <div class="col-sm-3">
+                                                        <input type="text" class="form-control" id="preparh2" placeholder="">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row" style="height: 25px";>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input ml-1" type="checkbox" value="" id="hisththa">
+                                                        <label class="form-check-label ml-4" for="hisththa">
+                                                            Tem histórico de HTHA
+                                                        </label>
+                                                    </div>
+                                                </div>  
+                                                <div class="form-group row" style="height: 25px";>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input ml-1" type="checkbox" value="" id="matsubst">
+                                                        <label class="form-check-label ml-4" for="flexCheckDefault">
+                                                            O material foi substituído por outro (mais resistente ao HTHA)
+                                                     </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="nav-e6" role="tabpanel" aria-labelledby="nav-e6-tab">                                                             
+                                    <nav>
+                                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                            <a class="nav-item nav-link active bg-secondary text-white" id="nav-e61-tab" data-toggle="tab" href="#nav-e61" role="tab" aria-controls="nav-e61" aria-selected="true">(S20) BRIT</a>
+                                            <a class="nav-item nav-link bg-secondary text-white" id="nav-e62-tab" data-toggle="tab" href="#nav-e62" role="tab" aria-controls="nav-e62" aria-selected="false">(S21) TEMP</a>
+                                            <a class="nav-item nav-link bg-secondary text-white" id="nav-e63-tab" data-toggle="tab" href="#nav-e63" role="tab" aria-controls="nav-e63" aria-selected="false">(S22) 885F</a>
+                                            <a class="nav-item nav-link bg-secondary text-white" id="nav-e64-tab" data-toggle="tab" href="#nav-e64" role="tab" aria-controls="nav-e64" aria-selected="false">(S23) SIGMA</a>
+                                        </div>
+                                    </nav>
+                                    <div class="tab-content" id="nav-tabContent">
+                                        <div class="tab-pane fade show active" id="nav-e61" role="tabpanel" aria-labelledby="nav-e61-tab">
+                                          
+                                            <div class="container-md">
+                                                <div class="row g-0 p-0">
+                                                    <div class="col-8 p-0">
+
+                                                        <div class="form-group row" style="height: 25px";>
+                                                            <label for="curvamat" class="col-sm-5 col-form-label">Curva do material</label>
+                                                            <div class="col-sm-2">
+                                                                <select class="form-control form-control-2g" id="curvamat">
+                                                                    <option>A</option>
+                                                                    <option>B</option>
+                                                                    <option>C</option>
+                                                                    <option>D</option>
+                                                                </select>
+                                                            </div> 
+                                                        </div>
+                                                                                                
+                                                        <div class="form-group row" style="height: 25px";>                                                 
+                                                            <label for="cet" class="col-sm-5 col-form-label">CET - temperatura crítica de exposição (&degC)</label>
+                                                            <div class="col-sm-2">
+                                                                <input type="text" class="form-control" id="cet" placeholder="">
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="form-group row" style="height: 25px";>                                                 
+                                                            <label for="tref" class="col-sm-5 col-form-label">Temperatura de referência em função do Ys e Tabela 20.3 e 20.1 (&degC)</label>
+                                                            <div class="col-sm-2">
+                                                                <input type="text" class="form-control" id="tref" placeholder="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="nav-e62" role="tabpanel" aria-labelledby="nav-e62-tab">
+                                        
+                                            <div class="container-md">
+                                                <div class="row g-0 p-0">
+                                                    <div class="col-8 p-0">
+
+                                                        <div class="form-group row" style="height: 25px";>
+                                                            <label for="acoliga" class="col-sm-3 col-form-label">Trata-se um aço liga conforme destes</label>
+                                                            <div class="col-sm-3">
+                                                                <select class="form-control form-control-2g" id="acoliga">
+                                                                    <option>2.25Cr-1Mo e 3Cr-1Mo</option>
+                                                                    <option>1.25Cr-1Mo e 1Cr-1Mo</option>
+                                                                    <option>Não aplicável</option>
+                                                                </select>
+                                                            </div> 
+                                                        </div>
+
+                                                        <div class="form-group row" style="height: 25px";>
+                                                            <label for="triagem" class="col-sm-3 col-form-label">Foi feita triagem de materiais</label>
+                                                            <div class="col-sm-3">
+                                                                <select class="form-control form-control-2g" id="triagem">
+                                                                    <option>Sim</option>
+                                                                    <option>Não</option>
+                                                                </select>
+                                                            </div> 
+                                                        </div>
+
+                                                        <div class="form-group row" style="height: 25px";>                                                 
+                                                            <label for="tempimpacto" class="col-sm-3 col-form-label">Temperatura do teste de impacto (&degC)</label>
+                                                            <div class="col-sm-3">
+                                                                <input type="text" class="form-control" id="tempimpacto3" placeholder="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row" style="height: 25px";>                                                 
+                                                            <label for="deltafatt" class="col-sm-3 col-form-label">Delta FATT</label>
+                                                            <div class="col-sm-3">
+                                                                <input type="text" class="form-control" id="deltafatt" placeholder="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row" style="height: 25px";>                                                 
+                                                            <label for="sce" class="col-sm-3 col-form-label">SCE - o delta de temperatura específica </label>
+                                                            <div class="col-sm-3">
+                                                                <input type="text" class="form-control" id="sce" placeholder="">
+                                                            </div>
+                                                        </div>
+                                                    
+                                                        <div class="form-group row" style="height: 25px";>                                                 
+                                                            <label for="percmn" class="col-sm-3 col-form-label">%Mn no aço</label>
+                                                            <div class="col-sm-3">
+                                                                <input type="text" class="form-control" id="percmn" placeholder="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row" style="height: 25px";>                                                 
+                                                            <label for="percp" class="col-sm-3 col-form-label">%P no aço</label>
+                                                            <div class="col-sm-3">
+                                                                <input type="text" class="form-control" id="percp3" placeholder="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row" style="height: 25px";>                                                 
+                                                            <label for="percsn" class="col-sm-3 col-form-label">%Sn no aço</label>
+                                                            <div class="col-sm-3">
+                                                                <input type="text" class="form-control" id="percsn" placeholder="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row" style="height: 25px";>                                                 
+                                                            <label for="percsb" class="col-sm-3 col-form-label">%Sb no aço</label>
+                                                            <div class="col-sm-3">
+                                                                <input type="text" class="form-control" id="percsb" placeholder="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row" style="height: 25px";>                                                 
+                                                            <label for="percas" class="col-sm-3 col-form-label">%As no aço</label>
+                                                            <div class="col-sm-3">
+                                                                <input type="text" class="form-control" id="percas" placeholder="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                                        
+                                        <div class="tab-pane fade" id="nav-e63" role="tabpanel" aria-labelledby="nav-e63-tab">
+                                                                        
+                                            <div class="container-md">
+                                                <div class="row g-0 p-0">
+                                                    <div class="col-8 p-0">
+
+                                                        <div class="form-group row" style="height: 25px";>                                                 
+                                                            <label for="tempref" class="col-sm-4 col-form-label">Temperatura de referência - Tref (&degC)</label>
+                                                            <div class="col-sm-2">
+                                                                <input type="text" class="form-control" id="tempref" placeholder="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="nav-e64" role="tabpanel" aria-labelledby="nav-e64-tab">
+                                            
+                                            <div class="container-md">
+                                                <div class="row g-0 p-0">
+                                                    <div class="col-8 p-0">
+                                                                                                                       
+                                                        <div class="form-group row" style="height: 25px";>
+                                                            <label for="quantsigma" class="col-sm-3 col-form-label">Quant. de Phase Sigma</label>
+                                                            <div class="col-sm-5">
+                                                                <select class="form-control form-control-2g" id="quantsigma">
+                                                                    <option>Baixa (maior que 1% e menor que 5%) </option>
+                                                                    <option>Média (maior ou igual que 5% e menor que 10%)</option>
+                                                                    <option>Alta (maior ou igual que 10%)</option>
+                                                                    <option>Não presente</option>
+                                                                </select>
+                                                            </div> 
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="nav-e7" role="tabpanel" aria-labelledby="nav-e7-tab">
+                                        
+                                    <div class="container-md">
+                                        <div class="row g-0 p-0">
+                                            <div class="col-8 p-0">
+
+                                                <div class="form-group row" style="height: 25px";>
+                                                    <label for="numfalha" class="col-sm-3 col-form-label">Número de falhas por fadiga previstas </label>
+                                                    <div class="col-sm-4">
+                                                        <select class="form-control form-control-2g" id="numfalha">
+                                                            <option>nenhuma </option>
+                                                            <option>uma</option>
+                                                            <option>maior que uma</option>  
+                                                        </select>
+                                                    </div> 
+                                                </div>
+                            
+                                                <div class="form-group row" style="height: 25px";>
+                                                    <label for="sevibra" class="col-sm-3 col-form-label">Severidade de vibrações</label>
+                                                    <div class="col-sm-4">
+                                                        <select class="form-control form-control-2g" id="sevibra">
+                                                            <option>pouca </option>
+                                                            <option>Moderada</option>
+                                                            <option>Severa</option>  
+                                                        </select>
+                                                    </div> 
+                                                </div>
+                                                
+                                                <div class="form-group row" style="height: 25px";>
+                                                    <label for="numsemana" class="col-sm-3 col-form-label">Número de semanas que a tubulação está vibrando</label>
+                                                    <div class="col-sm-4">
+                                                        <select class="form-control form-control-2g" id="numsemana">
+                                                            <option>0 a 2 </option>
+                                                            <option>2 a 13</option>
+                                                            <option>13 a 52</option>  
+                                                        </select>
+                                                    </div> 
+                                                </div>
+
+                                                <div class="form-group row" style="height: 25px";>
+                                                    <label for="altengsup" class="col-sm-3 col-form-label">Alterações foram feitas por estudo de engenharia</label>
+                                                    <div class="col-sm-4">
+                                                        <select class="form-control form-control-2g" id="altengsup">
+                                                            <option>Sim, com base na engenharia </option>
+                                                            <option>com base na na experiência </option>
+                                                            <option>Não foram feitas alterações</option>
+                                                        </select>
+                                                    </div> 
+                                                </div>
+
+                                                <div class="form-group row" style="height: 25px";>
+                                                    <label for="complex" class="col-sm-3 col-form-label">Complexidade da tubulação</label>
+                                                    <div class="col-sm-4">
+                                                        <select class="form-control form-control-2g" id="complex">
+                                                            <option>0 a 5 acessórios </option>
+                                                            <option>5 a 10 acessórios</option>
+                                                            <option>Maior que 10 acessórios</option>  
+                                                        </select>
+                                                    </div> 
+                                                </div>
+                                            
+                                                <div class="form-group row" style="height: 25px";>
+                                                    <label for="tipojuntatub" class="col-sm-3 col-form-label">Tipo de junta da tubulação ou projeto</label>
+                                                    <div class="col-sm-4">
+                                                        <select class="form-control form-control-2g" id="tipojuntatub">
+                                                            <option>threaded </option>
+                                                            <option>socket welded</option>
+                                                            <option>saddle on</option>  
+                                                            <option>saddle in</option>
+                                                            <option>piping tee</option>
+                                                            <option>weldolet</option>
+                                                            <option>sweepolet</option>
+                                                        </select>
+                                                    </div> 
+                                                </div>
+
+                                                <div class="form-group row" style="height: 25px";>
+                                                    <label for="qualsup" class="col-sm-3 col-form-label">Qualidade da suportação</label>
+                                                    <div class="col-sm-4">
+                                                        <select class="form-control form-control-2g" id="qualsup">
+                                                            <option>Bom estado </option>
+                                                            <option>Falta estudo ou manutenção</option>
+                                                        </select>
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                        </div>
+                        <div class="tab-pane fade p-0" id="nav-f" role="tabpanel" aria-labelledby="nav-f-tab">                      
+                            <div class="form-check">
+                                <input class="form-check-input ml-1" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label ml-4" for="flexCheckDefault">
+                                    Existe trinca
+                                </label>
+                            </div>
+                            <table class="table table-primary " style="width:80%">
+                                <thead>
+                                  <tr>
+                                    <th scope="col-3">Relatórios</th>
+                                    <th scope="col-3">Tipo de inspeção</th>
+                                    <th scope="col-3">Data da inspeção</th>
+                                    <th scope="col-3">Tipo de ensaio</th>
+                                    <th scope="col-3">Percentual</th>
+                                    <th scope="col-3">Eficiência</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>
+                                            <div class="col-7 p-0" >
+                                                <select class="form-control form-control-2g" id="qualsup">
+                                                    <option>Externa </option>
+                                                    <option>Interna</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="col-7 p-0">
+                                                <input type="date" class="form-control col-form-label pt-0" id="inputEmail3" placeholder="">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="col-7 p-0">
+                                                <select class="form-control form-control-2g" id="qualsup">
+                                                    <option>US-ME</option>
+                                                    <option>LP</option>
+                                                    <option>PM</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="col-2 p-0 ">
+                                                <input type="number" min="1" max="100" id="myPercent"/>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="col-7 p-0 ">
+                                                <select class="form-control form-control-2g" id="qualsup">
+                                                    <option>A</option>
+                                                    <option>B</option>
+                                                    <option>C</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                    </tr>                            
+                                    <tr>
+                                        <th scope="row">2</th>
+                                            <td>
+                                                <div class="col-7 p-0">
+                                                    <select class="form-control form-control-2g" id="qualsup">
+                                                        <option>Externa </option>
+                                                        <option>Interna</option>
+                                                    </select>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="col-7 p-0">
+                                                    <input type="date" class="form-control col-form-label pt-0" id="inputEmail3" placeholder="">           
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="col-7 p-0">
+                                                    <select class="form-control form-control-2g" id="qualsup">
+                                                        <option>US-ME</option>
+                                                        <option>LP</option>
+                                                        <option>PM</option>
+                                                    </select>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="col-2 p-0 ">
+                                                    <input type="number" min="1" max="100" id="myPercent"/>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="col-7 p-0 ">
+                                                    <select class="form-control form-control-2g" id="qualsup">
+                                                        <option>A</option>
+                                                        <option>B</option>
+                                                        <option>C</option>
+                                                    </select>
+                                                </div>
+                                            </td>
+                                        <tr>
+                                        <th scope="row">3</th>
+                                            <td>
+                                                <div class="col-sm-7 p-0">
+                                                    <select class="form-control form-control-2g" id="qualsup">
+                                                        <option>Externa </option>
+                                                        <option>Interna</option>
+                                                    </select>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="col-7 p-0">
+                                                    <input type="date" class="form-control col-form-label pt-0" id="inputEmail3" placeholder="">
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="col-7 p-0">
+                                                    <select class="form-control form-control-2g" id="qualsup">
+                                                        <option>US-ME</option>
+                                                        <option>LP</option>
+                                                        <option>PM</option>
+                                                    </select>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="col-2 p-0 ">
+                                                    <input type="number" min="1" max="100" id="myPercent"/>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="col-7 p-0 ">
+                                                    <select class="form-control form-control-2g" id="qualsup">
+                                                        <option>A</option>
+                                                        <option>B</option>
+                                                        <option>C</option>
+                                                    </select>
+                                                </div>
+                                            </td>
+                                            <tr>
+                                                <th scope="row">4</th>
+                                                    <td>
+                                                        <div class="col-sm-7 p-0">
+                                                            <select class="form-control form-control-2g" id="qualsup">
+                                                                <option>Externa </option>
+                                                                <option>Interna</option>
+                                                            </select>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="col-7 p-0">
+                                                            <input type="date" class="form-control col-form-label pt-0" id="inputEmail3" placeholder="">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="col-7 p-0">
+                                                            <select class="form-control form-control-2g" id="qualsup">
+                                                                <option>US-ME</option>
+                                                                <option>LP</option>
+                                                                <option>PM</option>
+                                                            </select>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="col-2 p-0 ">
+                                                            <input type="number" min="1" max="100" id="myPercent"/>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="col-7 p-0 ">
+                                                            <select class="form-control form-control-2g" id="qualsup">
+                                                                <option>A</option>
+                                                                <option>B</option>
+                                                                <option>C</option>
+                                                            </select>
+                                                        </div>
+                                                    </td>
+                                                    <tr>
+                                                        <th scope="row">5</th>
+                                                            <td>
+                                                                <div class="col-sm-7 p-0">
+                                                                    <select class="form-control form-control-2g" id="qualsup">
+                                                                        <option>Externa </option>
+                                                                        <option>Interna</option>
+                                                                    </select>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="col-7 p-0">
+                                                                    <input type="date" class="form-control col-form-label pt-0" id="inputEmail3" placeholder="">
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="col-7 p-0">
+                                                                    <select class="form-control form-control-2g" id="qualsup">
+                                                                        <option>US-ME</option>
+                                                                        <option>LP</option>
+                                                                        <option>PM</option>
+                                                                    </select>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="col-2 p-0 ">
+                                                                    <input type="number" min="1" max="100" id="myPercent"/>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="col-7 p-0 ">
+                                                                    <select class="form-control form-control-2g" id="qualsup">
+                                                                        <option>A</option>
+                                                                        <option>B</option>
+                                                                        <option>C</option>
+                                                                    </select>
+                                                                </div>
+                                                            </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade p-0" id="nav-g" role="tabpanel" aria-labelledby="nav-g-tab">      
+                            <a href="#"><img src="{% static '/imagens/Matrix.bmp' %}" width="500px"></a>
+                            
+                        
+                        </div>
+                    </div>
+                </div>   
+            </div> 
+        </div> 
+    </div>   
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  
+</body>
+
+{% endblock %}
