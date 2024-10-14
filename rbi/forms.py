@@ -24,13 +24,11 @@ class cadastroareaForm(forms.Form):
         return area
   
 class cadastroequipForm(forms.Form):
-    Empresa = forms.ModelChoiceField(Empresa.objects.all())
     area = forms.ModelChoiceField(Area.objects.all())
     tag = forms.CharField(max_length=30)
 
     def save(self):
         TAG = tag(
-            Empresa = self.cleaned_data['Empresa'],
             area = self.cleaned_data['area'],
             tag = self.cleaned_data['tag'],
         )
@@ -38,15 +36,11 @@ class cadastroequipForm(forms.Form):
         return TAG  
 
 class cadastrocomponenteForm(forms.Form):
-    Empresa = forms.ModelChoiceField(Empresa.objects.all())
-    Area = forms.ModelChoiceField(Area.objects.all())
     tag = forms.ModelChoiceField(tag.objects.all())
     componente = forms.CharField(max_length=30)    
 
     def save(self): 
         Comp = componente(
-            Empresa = self.cleaned_data['Empresa'],
-            Area = self.cleaned_data['Area'],
             tag = self.cleaned_data['tag'],            
             componente = self.cleaned_data['componente'],
         )
@@ -54,17 +48,11 @@ class cadastrocomponenteForm(forms.Form):
         return Comp  
 
 class cadastropropostaForm(forms.Form):
-    Empresa = forms.ModelChoiceField(Empresa.objects.all())
-    Area = forms.ModelChoiceField(Area.objects.all())
-    tag = forms.ModelChoiceField(tag.objects.all())
     componente = forms.ModelChoiceField(componente.objects.all())
     numeroproposta = forms.CharField(max_length=8)
 
     def save(self):
-        TAGP = proposta(
-            Empresa = self.cleaned_data['Empresa'],
-            Area = self.cleaned_data['Area'],
-            tag = self.cleaned_data['tag'],            
+        TAGP = proposta(            
             componente = self.cleaned_data['componente'],
             numeroproposta = self.cleaned_data['numeroproposta'], 
         )

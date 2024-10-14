@@ -10,15 +10,15 @@ class AreaAdmin(admin.ModelAdmin):
     #search_fields = ('nome',)
 
 class tagAdmin(admin.ModelAdmin):
-    list_display = ('Empresa','area', 'tag')
+    list_display = ('area', 'tag')
     #search_fields = ('tag',)
 
 class componenteAdmin(admin.ModelAdmin):
-    list_display = ('Empresa', 'Area', 'tag', 'componente')
+    list_display = ('tag', 'componente')
     #search_fields = ('componente',)
 
 class propostaAdmin(admin.ModelAdmin):
-    list_display = ('Empresa', 'Area','tag', 'componente', 'numeroproposta')
+    list_display = ('componente', 'numeroproposta')
     #search_fields = ('numeroproposta',)
 
 class equipamentoAdmin(admin.ModelAdmin):
