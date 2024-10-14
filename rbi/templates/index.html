@@ -74,6 +74,7 @@
     <div class="card">
         <div class="card-header">
                 <a href="#"><img src="{% static '/imagens/salvar-arquivo.jpg' %}" width="33px"/> </button>
+                <input type="submit" value="Salvar" class="btn btn-primary">
                 <a href="#"><img src="{% static '/imagens/abrir_pasta.jpg' %}" width="40px">
                 <a href="#"><img src="{% static '/imagens/Calculadora.jpg' %}" width="27px"></a>
          </div>
@@ -81,39 +82,105 @@
     <div class="container-md  style=" >
         <div class="row g-0 p-0"  >
             <div class="col-2 p-0">
-                <div class="card">
-                    <div class="card-header">
-                        Navegação   
-                        <ul class="list-group list-group-flush">    
+                <div class="card">                  
+                        <div class="card-header">Navegação</div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                {% for empresa in rbi %}
+                                    <li class="list-group-item">
+                                        <a
+                                            class="list-group list-group-flush"
+                                            data-toggle="collapse"
+                                            href="#collapse-{{empresa.id}}"
+                                            role="button"
+                                            aria-expanded="false"
+                                            aria-controls="collapse-{{empresa.id}}"
+                                            >{{ empresa.nome }}
+                                        </a>
                             
-                           {{ xxxx }}
-
-                            {% for empresa in rbi %}
-                                <li class="list-group-item">
-                                    <a href="#collapse{{empresa.slug}}" class="list-group list-group-flush" data-bs-toggle="collapse" href="#collapse{{empresa.slug}}" aria-expanded="false" aria-controls="collapse{{empresa.slug}}" role="button">{{ empresa.nome }}</a>
-                            
-                                    <div class="collapse" id="collapse{{empresa.slug}}">
                                         <ul class="list-group list-group-flush">
-
-                                            {{ rbi }}
-
-                                            {% for area in empresa.areas.all %}
-                                                <li class="list-group-item">
-                                                    <a href="#collapse{{area.slug}}" class="list-group list-group-flush" data-bs-toggle="collapse" href="#collapse{{area.slug}}" aria-expanded="false" aria-controls="collapse{{area.slug}}" role="button">{{ area.nome }}</a>
-            
-                                                    <div class="collapse" id="collapse{{area.slug}}">
+                                            <div class="collapse" id="collapse-{{empresa.id}}">
+                                                {% for area in empresa.areas.all %}
+                                                    <li class="list-group-item">
+                                                        <a
+                                                            class="list-group list-group-flush"
+                                                            data-toggle="collapse"
+                                                            href="#collapse-{{empresa.id}}-{{area.id}}"
+                                                            role="button"
+                                                            aria-expanded="false"
+                                                            aria-controls="collapse-{{empresa.id}}-{{area.id}}"
+                                                            >{{ area.nome }}
+                                                        </a>
+                                        
                                                         <ul class="list-group list-group-flush">
+                                                            <div class="collapse" id="collapse-{{empresa.id}}-{{area.id}}">
+                                                                                                                              
+                                                                {% for tag in area.area_tag.all %}
+                                                                    <li class="list-group-item">
+                                                                        <a
+                                                                            class="list-group list-group-flush"
+                                                                            data-toggle="collapse"
+                                                                            href="#collapse-{{empresa.id}}-{{area.id}}-{{tag.id}}"
+                                                                            role="button"
+                                                                            aria-expanded="false"
+                                                                            aria-controls="collapse-{{empresa.id}}-{{area.id}}-{{tag.id}}"
+                                                                            >{{ tag.tag }}
+                                                                        </a>
+                                                                        <ul class="list-group list-group-flush">
+                                                                            <div
+                                                                                class="collapse"
+                                                                                id="collapse-{{empresa.id}}-{{area.id}}-{{tag.id}}"
+                                                                                >
+
+                                                                                {% for componente in tag.area_tag1.all %}
+                                                                                    <li class="list-group-item">
+                                                                                        <a
+                                                                                            class="list-group list-group-flush"
+                                                                                            data-toggle="collapse"
+                                                                                            href="#collapse-{{empresa.id}}-{{area.id}}-{{tag.id}}-{{componente.id}}"
+                                                                                            role="button"
+                                                                                            aria-expanded="false"
+                                                                                            aria-controls="collapse-{{empresa.id}}-{{area.id}}-{{tag.id}}-{{componente.id}}"
+                                                                                            >{{ componente.componente }}
+                                                                                        </a>
                                                             
+                                                                                        <ul class="list-group list-group-flush">
+                                                                                            <div
+                                                                                                class="collapse"
+                                                                                                id="collapse-{{empresa.id}}-{{area.id}}-{{tag.id}}-{{componente.id}}"
+                                                                                                >
+
+                                                                                                {% for proposta in componente.tag_componente.all %}
+                                                                                                    <li class="list-group-item">
+                                                                                                        <a
+                                                                                                            class="list-group list-group-flush"
+                                                                                                            data-toggle="collapse"
+                                                                                                            href="#collapse-{{empresa.id}}-{{area.id}}-{{tag.id}}-{{componente.id}}-{{proposta.id}}"
+                                                                                                            role="button"
+                                                                                                            aria-expanded="false"
+                                                                                                            aria-controls="collapse-{{empresa.id}}-{{area.id}}-{{tag.id}}-{{componente.id}}-{{proposta.id}}"
+                                                                                                            >{{ proposta.numeroproposta }}
+                                                                                                        </a>                                                                                                       
+                                                                                                    </li>
+                                                                                                {% endfor %}
+                                                                                            </div>
+                                                                                        </ul>
+                                                                                    </li>
+                                                                                {% endfor %}
+                                                                            </div>
+                                                                        </ul>
+                                                                     </li>
+                                                                {% endfor %}
+                                                            </div>
                                                         </ul>
-                                                    </div>
-                                                </li>
-                                            {% endfor %}
+                                                    </li>
+                                                {% endfor %}
+                                            </div>
                                         </ul>
-                                    </div>
-                                </li>
-                            {% endfor %}
-                        </ul>                   
-                    </div> 
+                                    </li>
+                                {% endfor %}
+                            </ul> 
+                        </div>
                 </div>
             </div>
             <div class="col-10 p-0">
