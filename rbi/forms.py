@@ -1,5 +1,5 @@
 from django import forms
-from rbi.models import Empresa, Area, tag, proposta, componente
+from rbi.models import Empresa, Area, Tag, Proposta, Componente
 
 class cadastroempresaForm(forms.Form):
     nome = forms.CharField(max_length=50)
@@ -28,7 +28,7 @@ class cadastroequipForm(forms.Form):
     tag = forms.CharField(max_length=30)
 
     def save(self):
-        TAG = tag(
+        TAG = Tag(
             area = self.cleaned_data['area'],
             tag = self.cleaned_data['tag'],
         )
@@ -36,11 +36,11 @@ class cadastroequipForm(forms.Form):
         return TAG  
 
 class cadastrocomponenteForm(forms.Form):
-    tag = forms.ModelChoiceField(tag.objects.all())
+    tag = forms.ModelChoiceField(Tag.objects.all())
     componente = forms.CharField(max_length=30)    
 
     def save(self): 
-        Comp = componente(
+        Comp = Componente(
             tag = self.cleaned_data['tag'],            
             componente = self.cleaned_data['componente'],
         )
@@ -48,11 +48,11 @@ class cadastrocomponenteForm(forms.Form):
         return Comp  
 
 class cadastropropostaForm(forms.Form):
-    componente = forms.ModelChoiceField(componente.objects.all())
+    componente = forms.ModelChoiceField(Componente.objects.all())
     numeroproposta = forms.CharField(max_length=8)
 
     def save(self):
-        TAGP = proposta(            
+        TAGP = Proposta(            
             componente = self.cleaned_data['componente'],
             numeroproposta = self.cleaned_data['numeroproposta'], 
         )
