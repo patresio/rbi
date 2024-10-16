@@ -33,10 +33,20 @@
 
         
         <main>
-            <form method="post" enctype="=multipart/form-data">
+            
+            
+
+
+            <form method="post" enctype="=multipart/form-data" height="100px" width="auto">
                 {% csrf_token %}
                 <table>
                     {{cadastroempresa_form.as_table}}
-             </table>
+                </table>
     
                 <input type="submit" value="Cadastrar" class="btn btn-primary">
+            </form>
+       </main>
+    </body>
+
+
+

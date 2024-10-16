@@ -28,7 +28,7 @@ class Area(models.Model):
     
 class Tag(models.Model):
     tag = models.CharField(max_length=30, blank=True, null=True)
-    area = models.ForeignKey(Area, on_delete=models.CASCADE,related_name='area_tag', blank=True, null=True)
+    area = models.ForeignKey(Area, on_delete=models.CASCADE,related_name='area_tag')
     slug = models.SlugField(blank=True, null=True)
 
     def __str__(self):

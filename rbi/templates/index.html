@@ -82,13 +82,13 @@
     </div>
     <div class="container-md  style=" >
         <div class="row g-0 p-0"  >
-            <div class="col-2 p-0">
+            <div class="col-1.1 p-0">
                 <div class="card">                  
                         <div class="card-header">Navegação</div>
                         <div class="card-body">
                             <ul class="list-group list-group-flush">
                                 {% for empresa in rbi %}
-                                    <li class="list-group-item">
+                                    <li class="list-group-item" style="line-height: 0.8">
                                         <a
                                             class="list-group list-group-flush"
                                             data-toggle="collapse"
@@ -101,7 +101,7 @@
                                         <ul class="list-group list-group-flush">
                                             <div class="collapse" id="collapse-{{empresa.id}}">
                                                 {% for area in empresa.areas.all %}
-                                                    <li class="list-group-item">
+                                                    <li class="list-group-item" style="line-height: 0.8">
                                                         <a
                                                             class="list-group list-group-flush"
                                                             data-toggle="collapse"
@@ -115,7 +115,7 @@
                                                             <div class="collapse" id="collapse-{{empresa.id}}-{{area.id}}">
                                                                                                                               
                                                                 {% for tag in area.area_tag.all %}
-                                                                    <li class="list-group-item">
+                                                                    <li class="list-group-item" style="line-height: 0.8">
                                                                         <a
                                                                             class="list-group list-group-flush"
                                                                             data-toggle="collapse"
@@ -132,7 +132,7 @@
                                                                                 >
 
                                                                                 {% for componente in tag.area_tag1.all %}
-                                                                                    <li class="list-group-item">
+                                                                                    <li class="list-group-item" style="line-height: 0.8">
                                                                                         <a
                                                                                             class="list-group list-group-flush"
                                                                                             data-toggle="collapse"
@@ -150,7 +150,7 @@
                                                                                                 >
 
                                                                                                 {% for proposta in componente.tag_componente.all %}
-                                                                                                    <li class="list-group-item">
+                                                                                                    <li class="list-group-item" style="line-height: 0.8">
                                                                                                         <a
                                                                                                             class="list-group list-group-flush"
                                                                                                             data-toggle="collapse"
@@ -1553,20 +1553,16 @@
                             </div> 
                         </div>
                         <div class="tab-pane fade p-0" id="nav-f" role="tabpanel" aria-labelledby="nav-f-tab">                      
-                            <div class="form-check">
-                                <input class="form-check-input ml-1" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label ml-4" for="flexCheckDefault">
-                                    Existe trinca
-                                </label>
-                            </div>
-                            <table class="table table-primary " style="width:80%">
+                            
+                            <table class="table table-primary " style="width:97%">
                                 <thead>
                                   <tr>
-                                    <th scope="col-3">Relatórios</th>
+                                    <th scope="col-3">Documento</th>
                                     <th scope="col-3">Tipo de inspeção</th>
                                     <th scope="col-3">Data da inspeção</th>
+                                    <th scope="col-3">Mecanismo de dado</th>
                                     <th scope="col-3">Tipo de ensaio</th>
-                                    <th scope="col-3">Percentual</th>
+                                    <th scope="col-3">Percentual(%)</th>
                                     <th scope="col-3">Eficiência</th>
                                   </tr>
                                 </thead>
@@ -1574,7 +1570,7 @@
                                     <tr>
                                         <th scope="row">1</th>
                                         <td>
-                                            <div class="col-7 p-0" >
+                                            <div class="col-10 p-0" >
                                                 <select class="form-control form-control-2g" id="qualsup">
                                                     <option>Externa </option>
                                                     <option>Interna</option>
@@ -1582,12 +1578,26 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <div class="col-7 p-0">
+                                            <div class="col-10 p-0">
                                                 <input type="date" class="form-control col-form-label pt-0" id="inputEmail3" placeholder="">
                                             </div>
                                         </td>
                                         <td>
-                                            <div class="col-7 p-0">
+                                            <div class="col-12 p-0">
+                                                <select class="form-control form-control-2g" id="qualsup">
+                                                    <option>Perda localizada</option>
+                                                    <option>Perda generalizada</option>
+                                                    <option>Danos no linning</option>
+                                                    <option>SCC</option>
+                                                    <option>Danos Externos</option>
+                                                    <option>HTHA</option>
+                                                    <option>Fratura frágil</option>
+                                                    <option>Fadiga</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="col-10 p-0">
                                                 <select class="form-control form-control-2g" id="qualsup">
                                                     <option>US-ME</option>
                                                     <option>LP</option>
@@ -1596,16 +1606,19 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <div class="col-2 p-0 ">
-                                                <input type="number" min="1" max="100" id="myPercent"/>
+                                            <div class="col-9 p-0 ">
+                                                <div data-mdb-input-init class="form-outline">
+                                                    <input type="number" min="1" max="100" id="myPercent" class="form-control" />
+                                                </div>
                                             </div>
                                         </td>
                                         <td>
-                                            <div class="col-7 p-0 ">
+                                            <div class="col-9 p-0 ">
                                                 <select class="form-control form-control-2g" id="qualsup">
                                                     <option>A</option>
                                                     <option>B</option>
                                                     <option>C</option>
+                                                    <option>D</option>
                                                 </select>
                                             </div>
                                         </td>
@@ -1613,7 +1626,7 @@
                                     <tr>
                                         <th scope="row">2</th>
                                             <td>
-                                                <div class="col-7 p-0">
+                                                <div class="col-10 p-0">
                                                     <select class="form-control form-control-2g" id="qualsup">
                                                         <option>Externa </option>
                                                         <option>Interna</option>
@@ -1621,12 +1634,26 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="col-7 p-0">
+                                                <div class="col-10 p-0">
                                                     <input type="date" class="form-control col-form-label pt-0" id="inputEmail3" placeholder="">           
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="col-7 p-0">
+                                                <div class="col-12 p-0">
+                                                    <select class="form-control form-control-2g" id="qualsup">
+                                                        <option>Perda localizada</option>
+                                                        <option>Perda generalizada</option>
+                                                        <option>Danos no linning</option>
+                                                        <option>SCC</option>
+                                                        <option>Danos Externos</option>
+                                                        <option>HTHA</option>
+                                                        <option>Fratura frágil</option>
+                                                        <option>Fadiga</option>
+                                                    </select>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="col-10 p-0">
                                                     <select class="form-control form-control-2g" id="qualsup">
                                                         <option>US-ME</option>
                                                         <option>LP</option>
@@ -1635,23 +1662,26 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="col-2 p-0 ">
-                                                    <input type="number" min="1" max="100" id="myPercent"/>
+                                                <div class="col-9 p-0 ">
+                                                    <div data-mdb-input-init class="form-outline">
+                                                        <input type="number" min="1" max="100" id="myPercent" class="form-control" />
+                                                    </div>
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="col-7 p-0 ">
+                                                <div class="col-9 p-0 ">
                                                     <select class="form-control form-control-2g" id="qualsup">
                                                         <option>A</option>
                                                         <option>B</option>
                                                         <option>C</option>
+                                                        <option>D</option>
                                                     </select>
                                                 </div>
                                             </td>
                                         <tr>
                                         <th scope="row">3</th>
                                             <td>
-                                                <div class="col-sm-7 p-0">
+                                                <div class="col-sm-10 p-0">
                                                     <select class="form-control form-control-2g" id="qualsup">
                                                         <option>Externa </option>
                                                         <option>Interna</option>
@@ -1659,12 +1689,28 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="col-7 p-0">
+                                                <div class="col-10 p-0">
                                                     <input type="date" class="form-control col-form-label pt-0" id="inputEmail3" placeholder="">
                                                 </div>
                                             </td>
+
                                             <td>
-                                                <div class="col-7 p-0">
+                                                <div class="col-12 p-0">
+                                                    <select class="form-control form-control-2g" id="qualsup">
+                                                        <option>Perda localizada</option>
+                                                        <option>Perda generalizada</option>
+                                                        <option>Danos no linning</option>
+                                                        <option>SCC</option>
+                                                        <option>Danos Externos</option>
+                                                        <option>HTHA</option>
+                                                        <option>Fratura frágil</option>
+                                                        <option>Fadiga</option>
+                                                    </select>
+                                                </div>
+                                            </td>
+
+                                            <td>
+                                                <div class="col-10 p-0">
                                                     <select class="form-control form-control-2g" id="qualsup">
                                                         <option>US-ME</option>
                                                         <option>LP</option>
@@ -1673,23 +1719,26 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="col-2 p-0 ">
-                                                    <input type="number" min="1" max="100" id="myPercent"/>
+                                                <div class="col-9 p-0 ">
+                                                    <div data-mdb-input-init class="form-outline">
+                                                        <input type="number" min="1" max="100" id="myPercent" class="form-control" />
+                                                    </div>
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="col-7 p-0 ">
+                                                <div class="col-9 p-0 ">
                                                     <select class="form-control form-control-2g" id="qualsup">
                                                         <option>A</option>
                                                         <option>B</option>
                                                         <option>C</option>
+                                                        <option>D</option>
                                                     </select>
                                                 </div>
                                             </td>
                                             <tr>
                                                 <th scope="row">4</th>
                                                     <td>
-                                                        <div class="col-sm-7 p-0">
+                                                        <div class="col-sm-10 p-0">
                                                             <select class="form-control form-control-2g" id="qualsup">
                                                                 <option>Externa </option>
                                                                 <option>Interna</option>
@@ -1697,12 +1746,28 @@
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <div class="col-7 p-0">
+                                                        <div class="col-10 p-0">
                                                             <input type="date" class="form-control col-form-label pt-0" id="inputEmail3" placeholder="">
                                                         </div>
                                                     </td>
+
                                                     <td>
-                                                        <div class="col-7 p-0">
+                                                        <div class="col-12 p-0">
+                                                            <select class="form-control form-control-2g" id="qualsup">
+                                                                <option>Perda localizada</option>
+                                                                <option>Perda generalizada</option>
+                                                                <option>Danos no linning</option>
+                                                                <option>SCC</option>
+                                                                <option>Danos Externos</option>
+                                                                <option>HTHA</option>
+                                                                <option>Fratura frágil</option>
+                                                                <option>Fadiga</option>
+                                                            </select>
+                                                        </div>
+                                                    </td>
+
+                                                    <td>
+                                                        <div class="col-10 p-0">
                                                             <select class="form-control form-control-2g" id="qualsup">
                                                                 <option>US-ME</option>
                                                                 <option>LP</option>
@@ -1711,23 +1776,26 @@
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <div class="col-2 p-0 ">
-                                                            <input type="number" min="1" max="100" id="myPercent"/>
+                                                        <div class="col-9 p-0 ">
+                                                            <div data-mdb-input-init class="form-outline">
+                                                                <input type="number" min="1" max="100" id="myPercent" class="form-control" />
+                                                            </div>
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <div class="col-7 p-0 ">
+                                                        <div class="col-9 p-0 ">
                                                             <select class="form-control form-control-2g" id="qualsup">
                                                                 <option>A</option>
                                                                 <option>B</option>
                                                                 <option>C</option>
+                                                                <option>D</option>
                                                             </select>
                                                         </div>
                                                     </td>
                                                     <tr>
                                                         <th scope="row">5</th>
                                                             <td>
-                                                                <div class="col-sm-7 p-0">
+                                                                <div class="col-sm-10 p-0">
                                                                     <select class="form-control form-control-2g" id="qualsup">
                                                                         <option>Externa </option>
                                                                         <option>Interna</option>
@@ -1735,12 +1803,27 @@
                                                                 </div>
                                                             </td>
                                                             <td>
-                                                                <div class="col-7 p-0">
+                                                                <div class="col-10 p-0">
                                                                     <input type="date" class="form-control col-form-label pt-0" id="inputEmail3" placeholder="">
                                                                 </div>
                                                             </td>
+
                                                             <td>
-                                                                <div class="col-7 p-0">
+                                                                <div class="col-12 p-0">
+                                                                    <select class="form-control form-control-2g" id="qualsup">
+                                                                        <option>Perda localizada</option>
+                                                                        <option>Perda generalizada</option>
+                                                                        <option>Danos no linning</option>
+                                                                        <option>SCC</option>
+                                                                        <option>Danos Externos</option>
+                                                                        <option>HTHA</option>
+                                                                        <option>Fratura frágil</option>
+                                                                        <option>Fadiga</option>
+                                                                    </select>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="col-10 p-0">
                                                                     <select class="form-control form-control-2g" id="qualsup">
                                                                         <option>US-ME</option>
                                                                         <option>LP</option>
@@ -1749,16 +1832,19 @@
                                                                 </div>
                                                             </td>
                                                             <td>
-                                                                <div class="col-2 p-0 ">
-                                                                    <input type="number" min="1" max="100" id="myPercent"/>
+                                                                <div class="col-9 p-0 ">
+                                                                    <div data-mdb-input-init class="form-outline">
+                                                                        <input type="number" min="1" max="100" id="myPercent" class="form-control" />
+                                                                    </div>
                                                                 </div>
                                                             </td>
                                                             <td>
-                                                                <div class="col-7 p-0 ">
+                                                                <div class="col-9 p-0 ">
                                                                     <select class="form-control form-control-2g" id="qualsup">
                                                                         <option>A</option>
                                                                         <option>B</option>
                                                                         <option>C</option>
+                                                                        <option>D</option>
                                                                     </select>
                                                                 </div>
                                                             </td>
